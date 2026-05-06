@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Performance & Analytics Dashboard · Totto Colombia</title>
+<title>Performance & Analytics Dashboard · Johnathan Cortés</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
@@ -23,14 +23,12 @@
   header { background: linear-gradient(135deg, rgba(15,18,25,0.95) 0%, rgba(17,24,38,0.95) 100%); border-bottom: 1px solid var(--border); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
   .brand { display: flex; align-items: center; gap: 16px; }
   .brand-logo { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), #8ef100); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #0a0c10; letter-spacing: -1px; box-shadow: 0 4px 12px rgba(200,241,53,0.15); }
-  .brand-info h1 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 2px; }
+  .brand-info h1 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 2px; display: flex; align-items: center; gap: 8px;}
+  .demo-tag { font-family: 'DM Sans', sans-serif; font-size: 9px; background: rgba(251,191,36,0.15); color: var(--warning); padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(251,191,36,0.3); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
   .brand-info p { font-size: 12px; color: var(--muted); font-weight: 400; }
-  .header-badges { display: flex; gap: 10px; align-items: center; }
-  .tech-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); display: flex; align-items: center; gap: 5px; }
   
-  .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.2); color: var(--positive); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-  .live-dot { width: 6px; height: 6px; background: var(--positive); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  .header-badges { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .tech-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); display: flex; align-items: center; gap: 5px; }
 
   /* FILTERS */
   .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -39,14 +37,21 @@
   .filter-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 500; }
   .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
   .filter-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 700; box-shadow: 0 0 10px rgba(200,241,53,0.2); }
-  .filter-btn.meta.active { background: var(--meta); color: #fff; border-color: var(--meta); box-shadow: 0 0 10px rgba(24,119,242,0.3); }
-  .filter-btn.google.active { background: var(--google); color: #fff; border-color: var(--google); box-shadow: 0 0 10px rgba(234,67,53,0.3); }
-  .filter-btn.linkedin.active { background: var(--linkedin); color: #fff; border-color: var(--linkedin); box-shadow: 0 0 10px rgba(10,102,194,0.3); }
-  .divider-v { width: 1px; height: 24px; background: var(--border); }
 
-  main { padding: 32px; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+  main { padding: 32px; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
 
-  /* EXECUTIVE SUMMARY */
+  /* TABS NAVIGATION */
+  .tabs-nav { display: flex; gap: 16px; border-bottom: 1px solid var(--border); overflow-x: auto; padding-bottom: 0; margin-bottom: 8px; }
+  .tab-btn { background: transparent; border: none; color: var(--muted); font-size: 14px; font-family: 'Syne', sans-serif; font-weight: 700; padding: 12px 16px; cursor: pointer; position: relative; transition: color 0.2s; white-space: nowrap; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); }
+  .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--accent); border-radius: 3px 3px 0 0; }
+  
+  .tab-pane { display: none; flex-direction: column; gap: 32px; animation: fadeIn 0.4s ease; }
+  .tab-pane.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTIONS & CARDS */
   .story-banner { background: linear-gradient(135deg, rgba(200,241,53,0.04) 0%, rgba(53,200,241,0.04) 100%); border: 1px solid rgba(200,241,53,0.15); border-radius: var(--radius); padding: 24px 32px; display: flex; align-items: flex-start; gap: 20px; position: relative; overflow: hidden; }
   .story-banner::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--accent); }
   .story-icon { width: 48px; height: 48px; background: rgba(200,241,53,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
@@ -54,23 +59,23 @@
   .story-content p { font-size: 13px; color: #a1a8b8; line-height: 1.6; max-width: 1200px; }
   .story-content strong { color: var(--accent); font-weight: 600; }
 
-  /* KPIs */
-  .section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: -10px; display: flex; align-items: center; gap: 12px; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); display: flex; align-items: center; gap: 12px; }
   .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
-  
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
-  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+
+  /* KPIs (Mejorados para no rebasar caja) */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 8px; }
+  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); overflow: hidden; }
   .kpi-card:hover { border-color: rgba(200,241,53,0.3); transform: translateY(-3px); box-shadow: 0 8px 12px rgba(0,0,0,0.3); }
-  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: var(--radius) var(--radius) 0 0; background: var(--border); transition: background 0.2s; }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--border); transition: background 0.2s; }
   .kpi-card:hover::before { background: var(--accent); }
   .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-weight: 600; }
-  .kpi-value { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 10px; color: #fff; }
+  .kpi-value { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 10px; color: #fff; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
   .kpi-footer { display: flex; align-items: center; gap: 8px; font-size: 11px; }
   .kpi-delta { display: flex; align-items: center; gap: 4px; font-weight: 700; font-size: 12px; padding: 2px 6px; border-radius: 4px; }
   .kpi-delta.up { background: rgba(74,222,128,0.1); color: var(--positive); }
   .kpi-delta.down { background: rgba(248,113,113,0.1); color: var(--negative); }
   .kpi-delta.neutral { background: rgba(255,255,255,0.05); color: var(--muted); }
-  .kpi-sub { color: var(--muted); }
+  .kpi-sub { color: var(--muted); white-space: nowrap;}
 
   /* CHARTS */
   .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
@@ -81,45 +86,39 @@
   .chart-subtitle { font-size: 12px; color: var(--muted); font-weight: 400; }
   .chart-tag { font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; border: 1px solid; }
   .chart-tag.insight { background: rgba(200,241,53,0.05); color: var(--accent); border-color: rgba(200,241,53,0.2); }
-  .chart-tag.alert { background: rgba(248,113,113,0.05); color: var(--negative); border-color: rgba(248,113,113,0.2); }
-  .chart-tag.good { background: rgba(74,222,128,0.05); color: var(--positive); border-color: rgba(74,222,128,0.2); }
-  .chart-tag.neutral { background: rgba(139,146,165,0.05); color: var(--muted); border-color: rgba(139,146,165,0.2); }
-
-  canvas { max-height: 250px; }
+  
+  canvas { max-height: 250px; width: 100% !important; }
   canvas.tall { max-height: 320px; }
 
+  /* Donut Center mejorado para evitar que el texto salga */
   .donut-wrap { position: relative; display: flex; justify-content: center; align-items: center; height: 100%; min-height: 220px; }
-  .donut-center { position: absolute; text-align: center; pointer-events: none; }
-  .donut-big { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #fff; }
+  .donut-center { position: absolute; text-align: center; pointer-events: none; width: 60%; }
+  .donut-big { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; white-space: nowrap; }
   .donut-small { font-size: 11px; color: var(--muted); font-weight: 500; }
 
-  /* TABLE */
+  /* TABLES */
   .table-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   .table-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.01); }
-  .table-header h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
   table { width: 100%; border-collapse: collapse; }
   thead th { padding: 14px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--border); background: var(--surface2); }
   tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.15s; }
   tbody tr:hover { background: rgba(255,255,255,0.03); }
   tbody td { padding: 14px 16px; font-size: 13px; vertical-align: middle; color: #d1d5db; }
-  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
-  .channel-badge.meta { background: rgba(24,119,242,0.1); color: #60a5fa; border: 1px solid rgba(24,119,242,0.2); }
-  .channel-badge.google { background: rgba(234,67,53,0.1); color: #f87171; border: 1px solid rgba(234,67,53,0.2); }
-  .channel-badge.linkedin { background: rgba(10,102,194,0.1); color: #93c5fd; border: 1px solid rgba(10,102,194,0.2); }
-  .metric-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; }
+  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; border: 1px solid;}
+  .channel-badge.meta { background: rgba(24,119,242,0.1); color: #60a5fa; border-color: rgba(24,119,242,0.2); }
+  .channel-badge.google { background: rgba(234,67,53,0.1); color: #f87171; border-color: rgba(234,67,53,0.2); }
+  .channel-badge.linkedin { background: rgba(10,102,194,0.1); color: #93c5fd; border-color: rgba(10,102,194,0.2); }
   .bar-cell { display: flex; align-items: center; gap: 12px; }
   .mini-bar { flex: 1; height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
   .mini-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
-  .status-pill { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .status-pill.ok { background: rgba(74,222,128,0.1); color: var(--positive); border: 1px solid rgba(74,222,128,0.2); }
-  .status-pill.warn { background: rgba(251,191,36,0.1); color: var(--warning); border: 1px solid rgba(251,191,36,0.2); }
-  .status-pill.bad { background: rgba(248,113,113,0.1); color: var(--negative); border: 1px solid rgba(248,113,113,0.2); }
+  .status-pill { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid;}
+  .status-pill.ok { background: rgba(74,222,128,0.1); color: var(--positive); border-color: rgba(74,222,128,0.2); }
+  .status-pill.warn { background: rgba(251,191,36,0.1); color: var(--warning); border-color: rgba(251,191,36,0.2); }
+  .status-pill.bad { background: rgba(248,113,113,0.1); color: var(--negative); border-color: rgba(248,113,113,0.2); }
 
-  /* INSIGHTS (ACTIONABLE) */
-  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  
+  /* INSIGHTS */
   .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
-  .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; gap: 16px; align-items: flex-start; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+  .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; gap: 16px; align-items: flex-start; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
   .insight-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.15); }
   .insight-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
   .insight-icon.green { background: rgba(74,222,128,0.1); color: var(--positive); }
@@ -133,18 +132,17 @@
   .action-tag { display: inline-block; background: rgba(200,241,53,0.08); color: var(--accent); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; border: 1px dashed rgba(200,241,53,0.3); }
 
   /* PROJECTIONS */
+  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .projection-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   .projection-header { background: linear-gradient(135deg, rgba(200,241,53,0.05), rgba(53,200,241,0.05)); border-bottom: 1px solid var(--border); padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
   .projection-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #fff; }
-  .projection-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .projection-header p { font-size: 13px; color: var(--muted); margin-top: 4px; max-width: 600px;}
   .projection-controls { display: flex; gap: 8px; }
   .proj-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 600; }
-  .proj-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
   .proj-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); }
   .projection-body { padding: 32px; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; }
   .proj-scenarios { display: flex; flex-direction: column; gap: 12px; }
-  .scenario-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.2s; position: relative; }
-  .scenario-card:hover { border-color: rgba(255,255,255,0.2); }
+  .scenario-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.2s; }
   .scenario-card.selected { border-color: var(--accent); background: rgba(200,241,53,0.03); box-shadow: 0 0 15px rgba(200,241,53,0.05); }
   .scenario-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
   .scenario-info { flex: 1; }
@@ -152,18 +150,17 @@
   .scenario-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
   .scenario-result { text-align: right; }
   .scenario-roas { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; }
-  .scenario-label { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; }
+  
+  .note-box { background: rgba(255,255,255,0.02); border-left: 3px solid var(--muted); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 20px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .note-box strong { color: var(--text); }
 
+  /* FOOTER */
   footer { text-align: center; padding: 32px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 20px; }
   footer span { color: var(--accent); font-weight: 600; }
 
   @media (max-width: 1024px) {
     .charts-grid, .charts-grid-3, .attribution-row, .projection-body { grid-template-columns: 1fr; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .kpi-grid { grid-template-columns: 1fr; }
-    main { padding: 16px; }
   }
 </style>
 </head>
@@ -175,14 +172,13 @@
   <div class="brand">
     <div class="brand-logo">TT</div>
     <div class="brand-info">
-      <h1>Performance & Analytics Dashboard · Totto</h1>
+      <h1>Performance & Analytics Dashboard <span class="demo-tag">Datos Simulados</span></h1>
       <p>Vista de Analista de Datos · Modelado Multicanal (Meta, Google, LinkedIn)</p>
     </div>
   </div>
   <div class="header-badges">
     <div class="tech-badge">🛠️ Python / Pandas Backend</div>
     <div class="tech-badge">📊 SQL Data Pipeline</div>
-    <div class="live-badge"><span class="live-dot"></span>Datos Conectados</div>
   </div>
 </header>
 
@@ -214,208 +210,216 @@
 </div>
 
 <main>
-
-  <!-- EXECUTIVE SUMMARY -->
-  <div class="story-banner">
-    <div class="story-icon">🧠</div>
-    <div class="story-content">
-      <h2>Resumen Ejecutivo & Estrategia de Pauta</h2>
-      <p>
-        Dashboard construido analizando <strong>+5.2 millones de impresiones</strong> y estructurando datos extraídos mediante pipelines SQL. 
-        Durante Q1, la inversión total fue de <strong>$185M COP</strong> con un ROAS Blended saludable de 3.3x. 
-        Detectamos que <strong>Google Search</strong> lidera en eficiencia transaccional (ROAS 4.8x), mientras que <strong>Meta Ads</strong> actúa como el principal motor volumétrico (62% de conversiones). 
-        El reto principal radica en la fatiga de audiencias en Meta y el alto CAC B2B en LinkedIn. Abajo se proponen modelos de optimización de presupuesto enfocados a resultados de negocio.
-      </p>
-    </div>
+  
+  <!-- TABS NAV -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="openTab('tab-resumen', this)">📊 Resumen Ejecutivo</button>
+    <button class="tab-btn" onclick="openTab('tab-tactico', this)">🎯 Análisis Táctico y Campañas</button>
+    <button class="tab-btn" onclick="openTab('tab-insights', this)">🧠 Insights Accionables</button>
+    <button class="tab-btn" onclick="openTab('tab-forecast', this)">📈 Modelos & Forecasting</button>
   </div>
 
-  <!-- KPIs DINÁMICOS -->
-  <div class="section-title">Macro Métricas de Negocio (Filtrables)</div>
-  <div class="kpi-grid" id="kpiGrid">
-    <div class="kpi-card">
-      <div class="kpi-label">Media Spend (Inversión)</div>
-      <div class="kpi-value kpi-inv">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Ejecutado (COP)</span></div>
+  <!-- PESTAÑA 1: RESUMEN EJECUTIVO -->
+  <div id="tab-resumen" class="tab-pane active">
+    <div class="story-banner">
+      <div class="story-icon">🧠</div>
+      <div class="story-content">
+        <h2>Estrategia de Pauta (Demo Portfolio)</h2>
+        <p>
+          Dashboard construido analizando <strong>+5.2 millones de impresiones</strong> y estructurando datos extraídos mediante pipelines SQL simulados. 
+          En este escenario, la inversión Q1 fue de <strong>$185M COP</strong> con un ROAS Blended de 3.3x. 
+          <strong>Google Search</strong> lidera en eficiencia transaccional, mientras que <strong>Meta Ads</strong> actúa como motor volumétrico. 
+          Navega por las pestañas superiores para ver desgloses tácticos, insights accionables y modelos de proyección de presupuesto.
+        </p>
+      </div>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Revenue Atribuido</div>
-      <div class="kpi-value kpi-ing" style="color: var(--positive);">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Generado (COP)</span></div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">ROAS Blended</div>
-      <div class="kpi-value kpi-roas" style="color: var(--accent);">0.00x</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Retorno vs Gasto</span></div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">CPA Promedio (CAC Adq.)</div>
-      <div class="kpi-value kpi-cpa">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Eficiencia de Costo</span></div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Conversiones Totales</div>
-      <div class="kpi-value kpi-conv">0</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Ventas + Leads B2B</span></div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">CTR Global</div>
-      <div class="kpi-value kpi-ctr">0.00%</div>
-      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Tasa de Interacción</span></div>
-    </div>
-  </div>
 
-  <!-- CHARTS ROW 1 -->
-  <div class="charts-grid">
-    <div class="chart-card">
-      <div class="chart-header">
-        <div><div class="chart-title">Pacing: Inversión vs Retorno (ROAS)</div><div class="chart-subtitle">Análisis temporal de eficiencia. Barras = Spend · Línea = ROAS</div></div>
-        <span class="chart-tag insight">Trending</span>
+    <div>
+      <div class="section-title">Macro Métricas de Negocio (Interactivos)</div>
+      <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-card">
+          <div class="kpi-label">Media Spend (Inversión)</div>
+          <div class="kpi-value kpi-inv">$0</div>
+          <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Ejecutado (COP)</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Revenue Atribuido</div>
+          <div class="kpi-value kpi-ing" style="color: var(--positive);">$0</div>
+          <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Generado (COP)</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">ROAS Blended</div>
+          <div class="kpi-value kpi-roas" style="color: var(--accent);">0.00x</div>
+          <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Retorno vs Gasto</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CPA Promedio (CAC Adq.)</div>
+          <div class="kpi-value kpi-cpa">$0</div>
+          <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Eficiencia de Costo</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Conversiones Totales</div>
+          <div class="kpi-value kpi-conv">0</div>
+          <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Ventas + Leads B2B</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CTR Global</div>
+          <div class="kpi-value kpi-ctr">0.00%</div>
+          <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Tasa de Interacción</span></div>
+        </div>
       </div>
-      <canvas id="chartInversionRoas"></canvas>
     </div>
-    <div class="chart-card">
-      <div class="chart-header">
-        <div><div class="chart-title">Mix de Medios (MMM)</div><div class="chart-subtitle">Distribución porcentual del presupuesto</div></div>
-        <span class="chart-tag neutral">Estructura</span>
-      </div>
-      <div class="donut-wrap">
-        <canvas id="chartDonut" style="max-height:200px;"></canvas>
-        <div class="donut-center"><div class="donut-big donut-total">$0</div><div class="donut-small">COP Analizados</div></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- CHARTS ROW 2 -->
-  <div class="charts-grid-3">
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Engagement (CTR) vs Tiempo</div><div class="chart-subtitle">Mide la relevancia creativa</div></div><span class="chart-tag alert">Caída en Feb</span></div><canvas id="chartCTR"></canvas></div>
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">CPA Comparativo (Eficiencia)</div><div class="chart-subtitle">Costo de Adquisición por sub-red</div></div><span class="chart-tag good">Meta domina</span></div><canvas id="chartCPA"></canvas></div>
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Saturación: Frecuencia Meta</div><div class="chart-subtitle">Impactos únicos por usuario</div></div><span class="chart-tag alert">Riesgo Creativo</span></div><canvas id="chartFrequency"></canvas></div>
-  </div>
-
-  <!-- TABLA CAMPAÑAS (DINÁMICA) -->
-  <div class="section-title" style="margin-top: 10px;">Deep Dive Analítico: Performance Táctico</div>
-  <div class="table-section">
-    <div class="table-header">
-      <div><h3>Matriz de Campañas Activas</h3><div style="font-size:12px;color:var(--muted);margin-top:4px;">Datos recalculados en tiempo real según los parámetros seleccionados.</div></div>
-    </div>
-    <div style="overflow-x:auto;">
-      <table id="campaignTable">
-        <thead><tr><th>Nombre de Campaña</th><th>Red</th><th>Mes</th><th>Etapa</th><th>Inversión (COP)</th><th>Vol. Imps</th><th>CTR</th><th>CPA Real</th><th>ROAS</th><th>Diagnóstico</th></tr></thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- INSIGHTS ACCIONABLES PARA EL NEGOCIO -->
-  <div class="section-title">Data Storytelling: 6 Insights Críticos para el Equipo de Marketing</div>
-  <div class="insights-grid">
-    <div class="insight-card">
-      <div class="insight-icon green">✅</div>
-      <div class="insight-text">
-        <h4>1. Dominio en Branded Search</h4>
-        <p>Las keywords de marca en Google sostienen el performance con un ROAS atípico de <strong>6.2x</strong>. Tienen una alta intención transaccional.</p>
-        <div class="action-tag">Acción: Blindar Impression Share >95%</div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div><div class="chart-title">Pacing: Inversión vs Retorno (ROAS)</div><div class="chart-subtitle">Evolución temporal. Barras = Spend · Línea = ROAS</div></div>
+        </div>
+        <canvas id="chartInversionRoas"></canvas>
       </div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon red">⚠️</div>
-      <div class="insight-text">
-        <h4>2. Fatiga Creativa Detectada (Meta)</h4>
-        <p>El algoritmo se estancó en la Semana 2 de febrero. Frecuencia >4.5x provocó caída del 22% en CTR y aumento del CPA.</p>
-        <div class="action-tag">Directriz: Rotación de assets cada 14 días</div>
-      </div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon blue">🔄</div>
-      <div class="insight-text">
-        <h4>3. Canibalización en PMax</h4>
-        <p>Las campañas de Performance Max están robando tráfico a Search Marca para inflar su ROAS, descuidando el descubrimiento (Mid-funnel).</p>
-        <div class="action-tag">Táctica: Excluir 'Totto' mediante scripts</div>
-      </div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon purple">💼</div>
-      <div class="insight-text">
-        <h4>4. LTV vs CAC B2B (LinkedIn)</h4>
-        <p>El CPA es muy alto ($678K), pero el Lifetime Value (LTV) estimado de un contrato de franquicia es >$15M COP. ROI real no está reflejado.</p>
-        <div class="action-tag">Acción: Validar Leads B2B vs CRM Hubspot</div>
-      </div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon yellow">🎯</div>
-      <div class="insight-text">
-        <h4>5. Redistribución de Pacing</h4>
-        <p>Display Remarketing presenta ineficiencia crítica (ROAS 1.4x, CPA >$100K). Ese presupuesto tiene costo de oportunidad alto.</p>
-        <div class="action-tag">Optimización: Mover $9.5M a Meta Lookalike</div>
-      </div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon green">📊</div>
-      <div class="insight-text">
-        <h4>6. Brecha en Tasa de Conversión</h4>
-        <p>El tráfico de Meta tiene alta intención de 'Add to Cart', pero el drop-off en Checkout es del 65% en móvil.</p>
-        <div class="action-tag">UX/CRO: Testear botón "Compra Rápida"</div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div><div class="chart-title">Mix de Medios (MMM)</div><div class="chart-subtitle">Distribución porcentual dinámica</div></div>
+        </div>
+        <div class="donut-wrap">
+          <canvas id="chartDonut"></canvas>
+          <div class="donut-center"><div class="donut-big donut-total">$0</div><div class="donut-small">COP</div></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MODELOS ESTRUCTURALES -->
-  <div class="section-title">Modelos Analíticos Avanzados</div>
-  <div class="attribution-row">
-    <div class="chart-card">
-      <div class="chart-header">
+  <!-- PESTAÑA 2: ANÁLISIS TÁCTICO -->
+  <div id="tab-tactico" class="tab-pane">
+    <div class="section-title">Análisis Táctico por Sub-Red</div>
+    <div class="charts-grid-3">
+      <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Engagement (CTR)</div></div></div><canvas id="chartCTR"></canvas></div>
+      <div class="chart-card"><div class="chart-header"><div><div class="chart-title">CPA Comparativo</div></div></div><canvas id="chartCPA"></canvas></div>
+      <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Saturación: Frecuencia</div></div></div><canvas id="chartFrequency"></canvas></div>
+    </div>
+
+    <div class="section-title">Deep Dive Analítico: Performance Táctico</div>
+    <div class="table-section">
+      <div class="table-header">
+        <div><h3>Matriz de Campañas Activas</h3><div style="font-size:12px;color:var(--muted);margin-top:4px;">Datos recalculados en tiempo real según los parámetros seleccionados arriba.</div></div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table id="campaignTable">
+          <thead><tr><th>Nombre de Campaña</th><th>Red</th><th>Mes</th><th>Etapa</th><th>Inversión (COP)</th><th>Imps</th><th>CTR</th><th>CPA Real</th><th>ROAS</th><th>Diagnóstico</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA 3: INSIGHTS -->
+  <div id="tab-insights" class="tab-pane">
+    <div class="section-title">Data Storytelling: 6 Insights Críticos de Negocio</div>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-icon green">✅</div>
+        <div class="insight-text">
+          <h4>1. Dominio en Branded Search</h4>
+          <p>Las keywords de marca en Google sostienen el performance con un ROAS atípico de <strong>6.2x</strong>. Tienen una alta intención transaccional.</p>
+          <div class="action-tag">Acción: Blindar Impression Share >95%</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon red">⚠️</div>
+        <div class="insight-text">
+          <h4>2. Fatiga Creativa Detectada (Meta)</h4>
+          <p>El algoritmo se estancó en la Semana 2 de febrero. Frecuencia >4.5x provocó caída del 22% en CTR y aumento del CPA.</p>
+          <div class="action-tag">Directriz: Rotación de assets cada 14 días</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon blue">🔄</div>
+        <div class="insight-text">
+          <h4>3. Canibalización en PMax</h4>
+          <p>Las campañas de Performance Max están robando tráfico a Search Marca para inflar su ROAS, descuidando el descubrimiento (Mid-funnel).</p>
+          <div class="action-tag">Táctica: Excluir 'Totto' mediante scripts</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon purple">💼</div>
+        <div class="insight-text">
+          <h4>4. LTV vs CAC B2B (LinkedIn)</h4>
+          <p>El CPA es muy alto ($678K), pero el Lifetime Value (LTV) estimado de una franquicia es >$15M COP. ROI real no está reflejado en GA4.</p>
+          <div class="action-tag">Acción: Validar Leads B2B vs CRM Hubspot</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon yellow">🎯</div>
+        <div class="insight-text">
+          <h4>5. Redistribución de Pacing</h4>
+          <p>Display Remarketing presenta ineficiencia crítica (ROAS 1.4x, CPA >$100K). Ese presupuesto tiene costo de oportunidad alto.</p>
+          <div class="action-tag">Optimización: Mover $9.5M a Meta Lookalike</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon green">📊</div>
+        <div class="insight-text">
+          <h4>6. Brecha en Tasa de Conversión</h4>
+          <p>El tráfico de Meta tiene alta intención de 'Add to Cart', pero el drop-off en Checkout es del 65% en móvil.</p>
+          <div class="action-tag">UX/CRO: Testear botón "Compra Rápida"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA 4: MODELOS Y FORECASTING -->
+  <div id="tab-forecast" class="tab-pane">
+    <div class="section-title">Modelos Analíticos Avanzados</div>
+    <div class="attribution-row">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div><div class="chart-title">Modelo de Atribución: Last Click vs Data-Driven</div><div class="chart-subtitle">Cómo se distribuye realmente el mérito de la venta. Meta es subvalorado en Last Click.</div></div>
+        </div>
+        <canvas id="chartAttribution" class="tall"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div><div class="chart-title">Mapeo del Funnel (Log Scale)</div><div class="chart-subtitle">Análisis de fricción desde Impresión hasta la Compra.</div></div>
+        </div>
+        <canvas id="chartFunnel" class="tall"></canvas>
+      </div>
+    </div>
+
+    <div class="projection-section">
+      <div class="projection-header">
         <div>
-          <div class="chart-title">Modelo de Atribución: Last Click vs Data-Driven</div>
-          <div class="chart-subtitle">Cómo se distribuye realmente el mérito de la venta. Meta es subvalorado en Last Click.</div>
+          <h3>📈 Modelado de Escenarios (Forecasting)</h3>
+          <p>Simulación predictiva basada en los rendimientos observados del negocio.</p>
         </div>
-        <span class="chart-tag insight">Estructura Analítica</span>
+        <div class="projection-controls">
+          <button class="proj-btn active" onclick="setProjection('q2', this)">Forecasting Q2</button>
+          <button class="proj-btn" onclick="setProjection('h2', this)">Forecasting H2</button>
+          <button class="proj-btn" onclick="setProjection('year', this)">Proyección Anual</button>
+        </div>
       </div>
-      <canvas id="chartAttribution" class="tall"></canvas>
-    </div>
-    <div class="chart-card">
-      <div class="chart-header">
+      <div class="projection-body">
         <div>
-          <div class="chart-title">Mapeo del Funnel de Conversión (Log Scale)</div>
-          <div class="chart-subtitle">Análisis de fricción del usuario desde la Impresión hasta la Compra final.</div>
+          <canvas id="chartProjection" style="max-height:280px;"></canvas>
+          <div class="note-box">
+            <strong>Nota Metodológica:</strong> El <strong>Forecasting Q2</strong> modela el impacto a corto plazo implementando las optimizaciones tácticas (redistribución a Search y Meta Lookalike). El <strong>Forecasting H2</strong> escala los presupuestos evaluando la elasticidad del canal frente a las temporadas altas reales (Black Friday / Navidad).
+          </div>
         </div>
-        <span class="chart-tag neutral">Análisis CRO</span>
-      </div>
-      <canvas id="chartFunnel" class="tall"></canvas>
-    </div>
-  </div>
-
-  <!-- PROYECCIÓN INTERACTIVA -->
-  <div class="projection-section">
-    <div class="projection-header">
-      <div>
-        <h3>📈 Modelado de Escenarios (Forecasting)</h3>
-        <p>Simulación predictiva basada en los rendimientos observados. Selecciona un escenario para definir la estrategia del equipo.</p>
-      </div>
-      <div class="projection-controls">
-        <button class="proj-btn active" onclick="setProjection('q2', this)">Forecasting Q2</button>
-        <button class="proj-btn" onclick="setProjection('h2', this)">Forecasting H2</button>
-        <button class="proj-btn" onclick="setProjection('year', this)">Proyección Anual</button>
-      </div>
-    </div>
-    <div class="projection-body">
-      <div>
-        <canvas id="chartProjection" style="max-height:280px;"></canvas>
-      </div>
-      <div class="proj-scenarios">
-        <div class="scenario-card selected" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:#8b92a5; color:#8b92a5;"></div>
-          <div class="scenario-info"><div class="scenario-name">Escenario Conservador</div><div class="scenario-desc">Mantenimiento de presupuesto actual. Solo optimización técnica (A/B testing, pausas).</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:#8b92a5;">3.6x</div><div class="scenario-label">ROAS Proyectado</div></div>
-        </div>
-        <div class="scenario-card" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:var(--accent); color:var(--accent);"></div>
-          <div class="scenario-info"><div class="scenario-name">Escenario Moderado (Recomendado) ★</div><div class="scenario-desc">Inyección del +20% en presupuesto guiado por el modelo Data-Driven. Redistribución hacia Search y Meta Lookalike.</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent);">4.1x</div><div class="scenario-label">ROAS Proyectado</div></div>
-        </div>
-        <div class="scenario-card" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:var(--accent3); color:var(--accent3);"></div>
-          <div class="scenario-info"><div class="scenario-name">Escenario Agresivo (Scale-Up)</div><div class="scenario-desc">Aumento del +40% enfocado en dominar Share of Voice con Performance Max y YouTube Awareness.</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent3);">4.4x</div><div class="scenario-label">ROAS Proyectado</div></div>
+        <div class="proj-scenarios">
+          <div class="scenario-card selected" onclick="selectScenario(this)">
+            <div class="scenario-dot" style="background:#8b92a5; color:#8b92a5;"></div>
+            <div class="scenario-info"><div class="scenario-name">Escenario Conservador</div><div class="scenario-desc">Mantenimiento de presupuesto. Solo optimización técnica (A/B testing, pausas).</div></div>
+            <div class="scenario-result"><div class="scenario-roas" style="color:#8b92a5;">3.6x</div><div class="scenario-label">ROAS Est.</div></div>
+          </div>
+          <div class="scenario-card" onclick="selectScenario(this)">
+            <div class="scenario-dot" style="background:var(--accent); color:var(--accent);"></div>
+            <div class="scenario-info"><div class="scenario-name">Escenario Moderado ★</div><div class="scenario-desc">Inyección del +20% en presupuesto guiado por el modelo Data-Driven a canales de alto ROI.</div></div>
+            <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent);">4.1x</div><div class="scenario-label">ROAS Est.</div></div>
+          </div>
+          <div class="scenario-card" onclick="selectScenario(this)">
+            <div class="scenario-dot" style="background:var(--accent3); color:var(--accent3);"></div>
+            <div class="scenario-info"><div class="scenario-name">Escenario Agresivo</div><div class="scenario-desc">Aumento del +40% enfocado en dominar Share of Voice con PMax y Awareness.</div></div>
+            <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent3);">4.4x</div><div class="scenario-label">ROAS Est.</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -423,11 +427,24 @@
 
 </main>
 <footer>
-  Diseñado para rol de <span>Data / Performance Analyst</span> · Demostración de habilidades en Estructuración, Interpretación de Métricas, Storytelling y Orientación a Resultados · Creado en Streamlit.
+  Diseñado y desarrollado por <span>Johnathan Cortés</span> para demostración de portafolio.<br>
+  Rol objetivo: Data / Performance Analyst · Entorno Streamlit simula extracción de Base de Datos.
 </footer>
 </div>
 
 <script>
+// =============== NAVEGACIÓN DE PESTAÑAS (TABS) ===============
+function openTab(tabId, btnEl) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btnEl.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  
+  // Refrescar tamaño de gráficas para evitar problemas de render en display:none
+  const chartsToResize =[chartIR, donutChart, chartCTR, chartCPA, chartFreq, chartAttr, chartFunnel, projChart];
+  chartsToResize.forEach(c => { if(c) c.resize(); });
+}
+
 // =============== DATA SIMULADA PARA PORTAFOLIO ===============
 const campaigns =[
   { name: 'Brand Awareness - Temporada Amor', channel: 'meta', period: 'feb', goal: 'brand', inv: 32000000, imp: 4200000, ctr: 2.8, cpc: 280, conv: 890, cpa: 35955, roas: 2.9, status: 'ok' },
@@ -441,26 +458,21 @@ const campaigns =[
   { name: 'LinkedIn Lead Gen - Franquicias', channel: 'linkedin', period: 'jan', goal: 'conv', inv: 19000000, imp: 290000, ctr: 1.2, cpc: 5470, conv: 28, cpa: 678571, roas: 1.8, status: 'ok' }
 ];
 
-// Variables de estado
-let activeChannel = 'all';
-let activePeriod = 'q1';
-let activeGoal = 'all';
+let activeChannel = 'all'; let activePeriod = 'q1'; let activeGoal = 'all';
 
-// Formato de Moneda
+// Formato de Moneda (Ej. $594.3M para no ocupar espacio excesivo)
 function fmtCOP(v) {
   if (v >= 1000000) return '$' + (v/1000000).toFixed(1) + 'M';
   if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
   return '$' + Math.round(v);
 }
 
-// Configuración Chart.js
+// Configuración Chart.js global
 Chart.defaults.color = '#8b92a5';
 Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.maintainAspectRatio = false;
 Chart.defaults.plugins.legend.labels.usePointStyle = true;
-Chart.defaults.plugins.tooltip.backgroundColor = '#181c24';
-Chart.defaults.plugins.tooltip.titleColor = '#fff';
-Chart.defaults.plugins.tooltip.padding = 12;
 
 // EVENTOS DE FILTROS
 document.getElementById('filterChannel').addEventListener('click', e => {
@@ -481,9 +493,9 @@ document.getElementById('filterGoal').addEventListener('click', e => {
   btn.classList.add('active'); activeGoal = btn.dataset.goal; updateDashboard();
 });
 
-let donutChart; 
+// VARIABLES DE GRÁFICAS PARA RESIZE
+let donutChart, chartIR, chartCTR, chartCPA, chartFreq, chartAttr, chartFunnel, projChart; 
 
-// FUNCIÓN MAESTRA DE CÁLCULO
 function updateDashboard() {
   const filtered = campaigns.filter(c => {
     const matchChannel = activeChannel === 'all' ? true : c.channel === activeChannel;
@@ -491,7 +503,6 @@ function updateDashboard() {
     const matchGoal = activeGoal === 'all' ? true : c.goal === activeGoal;
     return matchChannel && matchPeriod && matchGoal;
   });
-  
   updateKPIs(filtered);
   updateTable(filtered);
   
@@ -517,19 +528,13 @@ function updateKPIs(filtered) {
   }
 
   let inv = 0, ing = 0, conv = 0, imp = 0, clics = 0;
-  filtered.forEach(c => {
-    inv += c.inv; ing += (c.inv * c.roas); conv += c.conv; imp += c.imp; clics += c.imp * (c.ctr / 100);
-  });
-
-  const roasStr = inv > 0 ? (ing / inv).toFixed(2) + 'x' : '0.00x';
-  const cpaStr = conv > 0 ? fmtCOP(inv / conv) : '$0';
-  const ctrStr = imp > 0 ? (clics / imp * 100).toFixed(2) + '%' : '0.00%';
+  filtered.forEach(c => { inv += c.inv; ing += (c.inv * c.roas); conv += c.conv; imp += c.imp; clics += c.imp * (c.ctr / 100); });
 
   document.querySelector('.kpi-inv').textContent = fmtCOP(inv);
   document.querySelector('.kpi-ing').textContent = fmtCOP(ing);
-  document.querySelector('.kpi-roas').textContent = roasStr;
-  document.querySelector('.kpi-cpa').textContent = cpaStr;
-  document.querySelector('.kpi-ctr').textContent = ctrStr;
+  document.querySelector('.kpi-roas').textContent = inv > 0 ? (ing / inv).toFixed(2) + 'x' : '0.00x';
+  document.querySelector('.kpi-cpa').textContent = conv > 0 ? fmtCOP(inv / conv) : '$0';
+  document.querySelector('.kpi-ctr').textContent = imp > 0 ? (clics / imp * 100).toFixed(2) + '%' : '0.00%';
   document.querySelector('.kpi-conv').textContent = conv.toLocaleString();
   document.querySelector('.donut-total').textContent = fmtCOP(inv);
 }
@@ -537,10 +542,8 @@ function updateKPIs(filtered) {
 function updateTable(filtered) {
   const tbody = document.getElementById('tableBody');
   if (filtered.length === 0) { 
-    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--muted); font-style: italic;">No hay datos para esta combinación de métricas. Prueba ajustando los filtros.</td></tr>'; 
-    return; 
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--muted); font-style: italic;">No hay datos para esta combinación. Ajusta los filtros.</td></tr>'; return; 
   }
-  
   const maxInv = Math.max(...filtered.map(c => c.inv));
   tbody.innerHTML = filtered.map(c => {
     const chanLabel = {meta:'Meta Ads', google:'Google Ads', linkedin:'LinkedIn Ads'}[c.channel];
@@ -549,9 +552,7 @@ function updateTable(filtered) {
     const goalLabel = {brand:'Awareness', conv:'Conversión', ret:'Retargeting'}[c.goal];
     const barPct = (c.inv / maxInv * 100).toFixed(0);
     const barColor = {meta:'var(--meta)', google:'var(--google)', linkedin:'var(--linkedin)'}[c.channel];
-    
-    return `
-      <tr>
+    return `<tr>
         <td><span style="font-weight:600; color:var(--text);">${c.name}</span></td>
         <td><span class="channel-badge ${c.channel}">${chanLabel}</span></td>
         <td><span style="color:var(--muted); font-size:12px;">${periodLabel}</span></td>
@@ -565,37 +566,33 @@ function updateTable(filtered) {
         <td>${fmtCOP(c.cpa)}</td>
         <td><span class="metric-value" style="color:${c.roas>=3?'var(--positive)':c.roas<2?'var(--negative)':'var(--warning)'}">${c.roas}x</span></td>
         <td><span class="status-pill ${c.status}">${statusLabel}</span></td>
-      </tr>
-    `;
+      </tr>`;
   }).join('');
 }
 
 
-// INICIALIZACIÓN DE GRÁFICAS ESTÁTICAS DE ANÁLISIS
-const ctxDonut = document.getElementById('chartDonut').getContext('2d');
-donutChart = new Chart(ctxDonut, { 
-  type: 'doughnut', 
-  data: { labels: ['Meta Ads', 'Google Ads', 'LinkedIn B2B'], datasets: [{ data:[0, 0, 0], backgroundColor:['#1877F2', '#EA4335', '#0A66C2'], borderWidth: 2, borderColor: '#111318', hoverOffset: 6 }] }, 
-  options: { cutout: '72%', plugins: { legend: { position: 'right', labels:{color:'#d1d5db', font:{size:11}} } } } 
-});
+// INSTANCIACIÓN DE GRÁFICAS ESTÁTICAS
+window.onload = () => {
+  donutChart = new Chart(document.getElementById('chartDonut').getContext('2d'), { 
+    type: 'doughnut', data: { labels: ['Meta', 'Google', 'LinkedIn'], datasets: [{ data:[0, 0, 0], backgroundColor:['#1877F2', '#EA4335', '#0A66C2'], borderWidth: 2, borderColor: '#111318' }] }, 
+    options: { cutout: '80%', plugins: { legend: { position: 'right', labels:{color:'#d1d5db', font:{size:11}} } } } 
+  });
 
-const ctxIR = document.getElementById('chartInversionRoas').getContext('2d');
-new Chart(ctxIR, { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[21,19,24], backgroundColor: '#1877F2', borderRadius:4 }, { label: 'Google', data:[23,27,27], backgroundColor: '#EA4335', borderRadius:4}, { label: 'LinkedIn', data:[14, 14, 16], backgroundColor: '#0A66C2', borderRadius: 4}, { label: 'ROAS Trend', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', fill:true, yAxisID: 'y1', pointRadius:5, pointHoverRadius:7, borderWidth:3 }] }, options: { scales: { x: {stacked: true, grid:{display:false}}, y: {stacked: true, border:{display:false}}, y1: {position: 'right', grid:{drawOnChartArea:false}, border:{display:false}} } } });
+  chartIR = new Chart(document.getElementById('chartInversionRoas').getContext('2d'), { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[21,19,24], backgroundColor: '#1877F2', borderRadius:4 }, { label: 'Google', data:[23,27,27], backgroundColor: '#EA4335', borderRadius:4}, { label: 'LinkedIn', data:[14, 14, 16], backgroundColor: '#0A66C2', borderRadius: 4}, { label: 'ROAS Trend', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', fill:true, yAxisID: 'y1', borderWidth:3 }] }, options: { scales: { x: {stacked: true, grid:{display:false}}, y: {stacked: true, border:{display:false}}, y1: {position: 'right', grid:{drawOnChartArea:false}, border:{display:false}} } } });
 
-const ctxCTR = document.getElementById('chartCTR').getContext('2d');
-new Chart(ctxCTR, { type: 'line', data: { labels:['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2', tension:0.4, borderWidth:3 }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335', tension:0.4, borderWidth:3 }, { label: 'LinkedIn', data:[1.0, 1.1, 1.2], borderColor: '#0A66C2', tension:0.4, borderWidth:3 }] }, options:{ scales:{x:{grid:{display:false}}, y:{border:{display:false}}} } });
+  chartCTR = new Chart(document.getElementById('chartCTR').getContext('2d'), { type: 'line', data: { labels:['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2', tension:0.4, borderWidth:3 }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335', tension:0.4, borderWidth:3 }, { label: 'LinkedIn', data:[1.0, 1.1, 1.2], borderColor: '#0A66C2', tension:0.4, borderWidth:3 }] }, options:{ scales:{x:{grid:{display:false}}, y:{border:{display:false}}} } });
 
-const ctxCPA = document.getElementById('chartCPA').getContext('2d');
-new Chart(ctxCPA, { type: 'bar', data: { labels:['Meta', 'Search', 'PMax', 'Display', 'LinkedIn'], datasets: [{ data:[27, 30, 31, 103, 692], backgroundColor:['#1877F2', '#EA4335', 'rgba(234,67,53,0.5)', '#f87171', '#0A66C2'], borderRadius:6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales:{ y:{grid:{display:false}, border:{display:false}}, x:{border:{display:false}} } } });
+  chartCPA = new Chart(document.getElementById('chartCPA').getContext('2d'), { type: 'bar', data: { labels:['Meta', 'Search', 'PMax', 'Display', 'LinkedIn'], datasets: [{ data:[27, 30, 31, 103, 692], backgroundColor:['#1877F2', '#EA4335', 'rgba(234,67,53,0.5)', '#f87171', '#0A66C2'], borderRadius:6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales:{ y:{grid:{display:false}, border:{display:false}}, x:{border:{display:false}} } } });
 
-const ctxFreq = document.getElementById('chartFrequency').getContext('2d');
-new Chart(ctxFreq, { type: 'line', data: { labels:['S1 Ene','S2 Ene','S3 Ene','S4 Ene','S1 Feb','S2 Feb','S3 Feb','S4 Feb'], datasets:[{ label:'Frecuencia', data:[2.1, 2.4, 2.8, 3.1, 3.6, 4.5, 4.8, 3.9], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill:true, tension:0.4, borderWidth:3, pointRadius:4 }] }, options:{ plugins: { legend: { display: false } }, scales:{ x:{grid:{display:false}}, y:{border:{display:false}} } } });
+  chartFreq = new Chart(document.getElementById('chartFrequency').getContext('2d'), { type: 'line', data: { labels:['S1 Ene','S2 Ene','S3 Ene','S4 Ene','S1 Feb','S2 Feb','S3 Feb','S4 Feb'], datasets:[{ label:'Frecuencia', data:[2.1, 2.4, 2.8, 3.1, 3.6, 4.5, 4.8, 3.9], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill:true, tension:0.4, borderWidth:3 }] }, options:{ plugins: { legend: { display: false } }, scales:{ x:{grid:{display:false}}, y:{border:{display:false}} } } });
 
-const ctxAttr = document.getElementById('chartAttribution').getContext('2d');
-new Chart(ctxAttr, { type: 'bar', data: { labels:['Meta Ads', 'Google Search', 'Google PMax', 'LinkedIn'], datasets:[{ label: 'Modelo Last-Click (%)', data:[28, 52, 14, 6], backgroundColor: '#374151', borderRadius: 4 }, { label: 'Modelo Data-Driven (%)', data:[41, 35, 18, 6], backgroundColor: '#c8f135', borderRadius: 4 } ] }, options: { scales: { x: { grid: { display: false } }, y:{border:{display:false}} } } });
+  chartAttr = new Chart(document.getElementById('chartAttribution').getContext('2d'), { type: 'bar', data: { labels:['Meta Ads', 'Google Search', 'Google PMax', 'LinkedIn'], datasets:[{ label: 'Modelo Last-Click (%)', data:[28, 52, 14, 6], backgroundColor: '#374151', borderRadius: 4 }, { label: 'Modelo Data-Driven (%)', data:[41, 35, 18, 6], backgroundColor: '#c8f135', borderRadius: 4 } ] }, options: { scales: { x: { grid: { display: false } }, y:{border:{display:false}} } } });
 
-const ctxFunnel = document.getElementById('chartFunnel').getContext('2d');
-new Chart(ctxFunnel, { type: 'bar', data: { labels:['Impresiones', 'Clics', 'Sesiones Web', 'Añadir a Carrito', 'Checkout Realizado', 'Compra Confirmada'], datasets:[{ data:[16800, 359, 290, 82, 51, 31], backgroundColor:['#35c8f1','#35c8f1','#35c8f1','#c8f135','#c8f135','#4ade80'], borderRadius: 6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { type: 'logarithmic', border:{display:false} }, y: { grid: { display: false }, border:{display:false} } } } });
+  chartFunnel = new Chart(document.getElementById('chartFunnel').getContext('2d'), { type: 'bar', data: { labels:['Imps', 'Clics', 'Sesiones', 'Add to Cart', 'Checkout', 'Compra'], datasets:[{ data:[16800, 359, 290, 82, 51, 31], backgroundColor:['#35c8f1','#35c8f1','#35c8f1','#c8f135','#c8f135','#4ade80'], borderRadius: 6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { type: 'logarithmic', border:{display:false} }, y: { grid: { display: false }, border:{display:false} } } } });
+
+  updateDashboard();
+  buildProjectionChart('q2');
+};
 
 // SISTEMA FORECASTING
 const projChartData = {
@@ -604,41 +601,28 @@ const projChartData = {
   year: { labels:['Q1 (Actual)','Q2 (Est.)','Q3 (Est.)','Q4 (Est.)'], conservador:[185, 188, 217, 285], moderado:[185, 251, 294, 405], agresivo:[185, 304, 362, 490] }
 };
 
-let projChart = null;
-
 function buildProjectionChart(periodKey) {
   const d = projChartData[periodKey];
   if (projChart) projChart.destroy();
-  const ctx = document.getElementById('chartProjection').getContext('2d');
-  projChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: d.labels,
-      datasets:[
-        { label: 'Conservador', data: d.conservador, borderColor: '#8b92a5', borderDash: [5,4], tension: 0.4, borderWidth:2 },
-        { label: 'Moderado ★', data: d.moderado, borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', tension: 0.4, fill: true, borderWidth: 3, pointRadius:5 },
-        { label: 'Agresivo', data: d.agresivo, borderColor: '#35c8f1', borderDash: [3,3], tension: 0.4, borderWidth:2 }
-      ]
-    },
-    options: { interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false } }, y: { title: { display: true, text: 'Ventas Proyectadas (COP M)' }, border:{display:false} } } }
+  projChart = new Chart(document.getElementById('chartProjection').getContext('2d'), {
+    type: 'line', data: { labels: d.labels, datasets:[
+      { label: 'Conservador', data: d.conservador, borderColor: '#8b92a5', borderDash: [5,4], tension: 0.4, borderWidth:2 },
+      { label: 'Moderado ★', data: d.moderado, borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', tension: 0.4, fill: true, borderWidth: 3, pointRadius:5 },
+      { label: 'Agresivo', data: d.agresivo, borderColor: '#35c8f1', borderDash: [3,3], tension: 0.4, borderWidth:2 }
+    ]},
+    options: { interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false } }, y: { title: { display: true, text: 'Ventas Proy. (COP M)' }, border:{display:false} } } }
   });
 }
 
 function setProjection(periodKey, el) {
   document.querySelectorAll('.proj-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  buildProjectionChart(periodKey);
+  el.classList.add('active'); buildProjectionChart(periodKey);
 }
 
 function selectScenario(el) {
   document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
 }
-
-// ARRANQUE
-updateDashboard();
-buildProjectionChart('q2');
-
 </script>
 </body>
 </html>
