@@ -3,155 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Performance Digital · Totto Colombia 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>Performance & Analytics Dashboard · Totto Colombia</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root {
     --bg: #0a0c10; --surface: #111318; --surface2: #181c24; --border: rgba(255,255,255,0.07);
-    --text: #e8eaf0; --muted: #6b7280; --meta: #1877F2; --google: #EA4335; --linkedin: #0A66C2;
+    --text: #e8eaf0; --muted: #8b92a5; --meta: #1877F2; --google: #EA4335; --linkedin: #0A66C2;
     --accent: #c8f135; --accent2: #f1c835; --accent3: #35c8f1; --positive: #4ade80;
     --negative: #f87171; --warning: #fbbf24; --radius: 16px; --radius-sm: 10px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; line-height: 1.5; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
   .everything { position: relative; z-index: 1; }
 
-  header { background: linear-gradient(135deg, #0f1219 0%, #111826 100%); border-bottom: 1px solid var(--border); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); }
-  .brand { display: flex; align-items: center; gap: 14px; }
-  .brand-logo { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), #8ef100); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #0a0c10; letter-spacing: -1px; }
-  .brand-info h1 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
-  .brand-info p { font-size: 11px; color: var(--muted); font-weight: 300; }
-  .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .period-badge { background: rgba(200, 241, 53, 0.1); border: 1px solid rgba(200, 241, 53, 0.25); color: var(--accent); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-  .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.2); color: var(--positive); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+  /* HEADER */
+  header { background: linear-gradient(135deg, rgba(15,18,25,0.95) 0%, rgba(17,24,38,0.95) 100%); border-bottom: 1px solid var(--border); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand-logo { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), #8ef100); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #0a0c10; letter-spacing: -1px; box-shadow: 0 4px 12px rgba(200,241,53,0.15); }
+  .brand-info h1 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 2px; }
+  .brand-info p { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .header-badges { display: flex; gap: 10px; align-items: center; }
+  .tech-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  
+  .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.2); color: var(--positive); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
   .live-dot { width: 6px; height: 6px; background: var(--positive); border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
-  .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .filters-label { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
-  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
-  .filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  /* FILTERS */
+  .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .filters-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 500; }
   .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
-  .filter-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 600; }
-  .filter-btn.meta.active { background: var(--meta); color: #fff; border-color: var(--meta); }
-  .filter-btn.google.active { background: var(--google); color: #fff; border-color: var(--google); }
-  .filter-btn.linkedin.active { background: var(--linkedin); color: #fff; border-color: var(--linkedin); }
-  .divider-v { width: 1px; height: 28px; background: var(--border); }
+  .filter-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 700; box-shadow: 0 0 10px rgba(200,241,53,0.2); }
+  .filter-btn.meta.active { background: var(--meta); color: #fff; border-color: var(--meta); box-shadow: 0 0 10px rgba(24,119,242,0.3); }
+  .filter-btn.google.active { background: var(--google); color: #fff; border-color: var(--google); box-shadow: 0 0 10px rgba(234,67,53,0.3); }
+  .filter-btn.linkedin.active { background: var(--linkedin); color: #fff; border-color: var(--linkedin); box-shadow: 0 0 10px rgba(10,102,194,0.3); }
+  .divider-v { width: 1px; height: 24px; background: var(--border); }
 
-  main { padding: 28px 32px; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+  main { padding: 32px; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
 
-  .story-banner { background: linear-gradient(135deg, rgba(200,241,53,0.06) 0%, rgba(53,200,241,0.06) 100%); border: 1px solid rgba(200,241,53,0.15); border-radius: var(--radius); padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; }
-  .story-icon { width: 40px; height: 40px; background: rgba(200,241,53,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .story-content h2 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
-  .story-content p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .story-content strong { color: var(--text); }
+  /* EXECUTIVE SUMMARY */
+  .story-banner { background: linear-gradient(135deg, rgba(200,241,53,0.04) 0%, rgba(53,200,241,0.04) 100%); border: 1px solid rgba(200,241,53,0.15); border-radius: var(--radius); padding: 24px 32px; display: flex; align-items: flex-start; gap: 20px; position: relative; overflow: hidden; }
+  .story-banner::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--accent); }
+  .story-icon { width: 48px; height: 48px; background: rgba(200,241,53,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .story-content h2 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+  .story-content p { font-size: 13px; color: #a1a8b8; line-height: 1.6; max-width: 1200px; }
+  .story-content strong { color: var(--accent); font-weight: 600; }
 
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
-  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: default; }
-  .kpi-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
-  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius) var(--radius) 0 0; }
-  .kpi-card.accent::before { background: var(--accent); }
-  .kpi-card.meta::before { background: var(--meta); }
-  .kpi-card.google::before { background: var(--google); }
-  .kpi-card.linkedin::before { background: var(--linkedin); }
-  .kpi-card.warn::before { background: var(--warning); }
-  .kpi-card.info::before { background: var(--accent3); }
-  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; font-weight: 500; }
-  .kpi-value { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+  /* KPIs */
+  .section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: -10px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
+  
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
+  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+  .kpi-card:hover { border-color: rgba(200,241,53,0.3); transform: translateY(-3px); box-shadow: 0 8px 12px rgba(0,0,0,0.3); }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: var(--radius) var(--radius) 0 0; background: var(--border); transition: background 0.2s; }
+  .kpi-card:hover::before { background: var(--accent); }
+  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-weight: 600; }
+  .kpi-value { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 10px; color: #fff; }
   .kpi-footer { display: flex; align-items: center; gap: 8px; font-size: 11px; }
-  .kpi-delta { display: flex; align-items: center; gap: 3px; font-weight: 600; font-size: 12px; }
-  .kpi-delta.up { color: var(--positive); }
-  .kpi-delta.down { color: var(--negative); }
-  .kpi-delta.neutral { color: var(--muted); }
+  .kpi-delta { display: flex; align-items: center; gap: 4px; font-weight: 700; font-size: 12px; padding: 2px 6px; border-radius: 4px; }
+  .kpi-delta.up { background: rgba(74,222,128,0.1); color: var(--positive); }
+  .kpi-delta.down { background: rgba(248,113,113,0.1); color: var(--negative); }
+  .kpi-delta.neutral { background: rgba(255,255,255,0.05); color: var(--muted); }
   .kpi-sub { color: var(--muted); }
 
-  .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-  .charts-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; }
-  .chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; gap: 12px; }
-  .chart-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .chart-subtitle { font-size: 11px; color: var(--muted); font-weight: 300; }
-  .chart-tag { font-size: 10px; padding: 3px 10px; border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; }
-  .chart-tag.insight { background: rgba(200,241,53,0.12); color: var(--accent); }
-  .chart-tag.alert { background: rgba(248,113,113,0.12); color: var(--negative); }
-  .chart-tag.good { background: rgba(74,222,128,0.12); color: var(--positive); }
-  .chart-tag.neutral { background: rgba(107,114,128,0.15); color: var(--muted); }
+  /* CHARTS */
+  .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .charts-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 12px; }
+  .chart-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+  .chart-subtitle { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .chart-tag { font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; border: 1px solid; }
+  .chart-tag.insight { background: rgba(200,241,53,0.05); color: var(--accent); border-color: rgba(200,241,53,0.2); }
+  .chart-tag.alert { background: rgba(248,113,113,0.05); color: var(--negative); border-color: rgba(248,113,113,0.2); }
+  .chart-tag.good { background: rgba(74,222,128,0.05); color: var(--positive); border-color: rgba(74,222,128,0.2); }
+  .chart-tag.neutral { background: rgba(139,146,165,0.05); color: var(--muted); border-color: rgba(139,146,165,0.2); }
 
-  canvas { max-height: 240px; }
-  canvas.tall { max-height: 300px; }
+  canvas { max-height: 250px; }
+  canvas.tall { max-height: 320px; }
 
-  .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
-  .donut-wrap { position: relative; }
-  .donut-big { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
-  .donut-small { font-size: 11px; color: var(--muted); }
+  .donut-wrap { position: relative; display: flex; justify-content: center; align-items: center; height: 100%; min-height: 220px; }
+  .donut-center { position: absolute; text-align: center; pointer-events: none; }
+  .donut-big { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #fff; }
+  .donut-small { font-size: 11px; color: var(--muted); font-weight: 500; }
 
+  /* TABLE */
   .table-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .table-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .table-header h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .table-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.01); }
+  .table-header h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
   table { width: 100%; border-collapse: collapse; }
-  thead th { padding: 12px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--surface2); }
-  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
-  tbody tr:hover { background: rgba(255,255,255,0.02); }
-  tbody tr:last-child { border-bottom: none; }
-  tbody td { padding: 13px 16px; font-size: 13px; vertical-align: middle; }
-  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
-  .channel-badge.meta { background: rgba(24,119,242,0.15); color: #60a5fa; }
-  .channel-badge.google { background: rgba(234,67,53,0.15); color: #f87171; }
-  .channel-badge.linkedin { background: rgba(10,102,194,0.15); color: #93c5fd; }
-  .metric-value { font-family: 'Syne', sans-serif; font-weight: 700; }
-  .bar-cell { display: flex; align-items: center; gap: 10px; }
-  .mini-bar { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-  .mini-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
-  .status-pill { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-  .status-pill.ok { background: rgba(74,222,128,0.12); color: var(--positive); }
-  .status-pill.warn { background: rgba(251,191,36,0.12); color: var(--warning); }
-  .status-pill.bad { background: rgba(248,113,113,0.12); color: var(--negative); }
+  thead th { padding: 14px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.15s; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody td { padding: 14px 16px; font-size: 13px; vertical-align: middle; color: #d1d5db; }
+  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+  .channel-badge.meta { background: rgba(24,119,242,0.1); color: #60a5fa; border: 1px solid rgba(24,119,242,0.2); }
+  .channel-badge.google { background: rgba(234,67,53,0.1); color: #f87171; border: 1px solid rgba(234,67,53,0.2); }
+  .channel-badge.linkedin { background: rgba(10,102,194,0.1); color: #93c5fd; border: 1px solid rgba(10,102,194,0.2); }
+  .metric-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; }
+  .bar-cell { display: flex; align-items: center; gap: 12px; }
+  .mini-bar { flex: 1; height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .mini-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+  .status-pill { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .status-pill.ok { background: rgba(74,222,128,0.1); color: var(--positive); border: 1px solid rgba(74,222,128,0.2); }
+  .status-pill.warn { background: rgba(251,191,36,0.1); color: var(--warning); border: 1px solid rgba(251,191,36,0.2); }
+  .status-pill.bad { background: rgba(248,113,113,0.1); color: var(--negative); border: 1px solid rgba(248,113,113,0.2); }
 
-  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  /* INSIGHTS (ACTIONABLE) */
+  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   
-  .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-  .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.2s; }
-  .insight-card:hover { border-color: rgba(255,255,255,0.15); }
-  .insight-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .insight-icon.green { background: rgba(74,222,128,0.12); }
-  .insight-icon.red { background: rgba(248,113,113,0.12); }
-  .insight-icon.yellow { background: rgba(251,191,36,0.12); }
-  .insight-icon.blue { background: rgba(53,200,241,0.12); }
-  .insight-text h4 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
-  .insight-text p { font-size: 12px; color: var(--muted); line-height: 1.55; }
-  .insight-text strong { color: var(--text); }
+  .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: flex; gap: 16px; align-items: flex-start; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+  .insight-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.15); }
+  .insight-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .insight-icon.green { background: rgba(74,222,128,0.1); color: var(--positive); }
+  .insight-icon.red { background: rgba(248,113,113,0.1); color: var(--negative); }
+  .insight-icon.yellow { background: rgba(251,191,36,0.1); color: var(--warning); }
+  .insight-icon.blue { background: rgba(53,200,241,0.1); color: var(--accent3); }
+  .insight-icon.purple { background: rgba(168,85,247,0.1); color: #a855f7; }
+  .insight-text h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+  .insight-text p { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+  .insight-text strong { color: var(--text); font-weight: 600; }
+  .action-tag { display: inline-block; background: rgba(200,241,53,0.08); color: var(--accent); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; border: 1px dashed rgba(200,241,53,0.3); }
 
+  /* PROJECTIONS */
   .projection-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .projection-header { background: linear-gradient(135deg, rgba(200,241,53,0.08), rgba(53,200,241,0.08)); border-bottom: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .projection-header h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
-  .projection-header p { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .projection-header { background: linear-gradient(135deg, rgba(200,241,53,0.05), rgba(53,200,241,0.05)); border-bottom: 1px solid var(--border); padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .projection-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #fff; }
+  .projection-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
   .projection-controls { display: flex; gap: 8px; }
-  .proj-btn { padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
-  .proj-btn:hover { background: var(--surface2); color: var(--text); }
-  .proj-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 600; }
-  .projection-body { padding: 24px; display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+  .proj-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+  .proj-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+  .proj-btn.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); }
+  .projection-body { padding: 32px; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; }
   .proj-scenarios { display: flex; flex-direction: column; gap: 12px; }
-  .scenario-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.2s; }
-  .scenario-card:hover { border-color: rgba(255,255,255,0.15); }
-  .scenario-card.selected { border-color: var(--accent); background: rgba(200,241,53,0.05); }
-  .scenario-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .scenario-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .scenario-card:hover { border-color: rgba(255,255,255,0.2); }
+  .scenario-card.selected { border-color: var(--accent); background: rgba(200,241,53,0.03); box-shadow: 0 0 15px rgba(200,241,53,0.05); }
+  .scenario-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
   .scenario-info { flex: 1; }
-  .scenario-name { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
-  .scenario-desc { font-size: 11px; color: var(--muted); }
+  .scenario-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #fff; }
+  .scenario-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
   .scenario-result { text-align: right; }
-  .scenario-roas { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
-  .scenario-label { font-size: 10px; color: var(--muted); }
+  .scenario-roas { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; }
+  .scenario-label { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; }
 
-  footer { text-align: center; padding: 24px; color: var(--muted); font-size: 11px; border-top: 1px solid var(--border); }
-  .section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  footer { text-align: center; padding: 32px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 20px; }
+  footer span { color: var(--accent); font-weight: 600; }
 
-  @media (max-width: 900px) {
-    main { padding: 16px; }
+  @media (max-width: 1024px) {
     .charts-grid, .charts-grid-3, .attribution-row, .projection-body { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    main { padding: 16px; }
   }
 </style>
 </head>
@@ -163,90 +175,92 @@
   <div class="brand">
     <div class="brand-logo">TT</div>
     <div class="brand-info">
-      <h1>Totto Colombia · Performance Analytics</h1>
-      <p>Data Analyst Dashboard · Q1 2026 · Meta Ads + Google Ads + LinkedIn Ads</p>
+      <h1>Performance & Analytics Dashboard · Totto</h1>
+      <p>Vista de Analista de Datos · Modelado Multicanal (Meta, Google, LinkedIn)</p>
     </div>
   </div>
-  <div class="header-right">
-    <span class="period-badge">Ene – Mar 2026</span>
-    <span class="live-badge"><span class="live-dot"></span>Actualizado hoy</span>
+  <div class="header-badges">
+    <div class="tech-badge">🛠️ Python / Pandas Backend</div>
+    <div class="tech-badge">📊 SQL Data Pipeline</div>
+    <div class="live-badge"><span class="live-dot"></span>Datos Conectados</div>
   </div>
 </header>
 
-<!-- FILTROS -->
+<!-- FILTERS -->
 <div class="filters-bar">
-  <span class="filters-label">Canal</span>
+  <span class="filters-label">Fuente de Datos</span>
   <div class="filter-group" id="filterChannel">
-    <button class="filter-btn active" data-channel="all">Todos</button>
+    <button class="filter-btn active" data-channel="all">Cross-Channel</button>
     <button class="filter-btn meta" data-channel="meta">Meta Ads</button>
     <button class="filter-btn google" data-channel="google">Google Ads</button>
     <button class="filter-btn linkedin" data-channel="linkedin">LinkedIn Ads</button>
   </div>
   <div class="divider-v"></div>
-  <span class="filters-label">Período</span>
+  <span class="filters-label">Ciclo (Q1 2026)</span>
   <div class="filter-group" id="filterPeriod">
-    <button class="filter-btn active" data-period="q1">Q1 2026</button>
+    <button class="filter-btn active" data-period="q1">Trimestre Completo</button>
     <button class="filter-btn" data-period="jan">Enero</button>
     <button class="filter-btn" data-period="feb">Febrero</button>
     <button class="filter-btn" data-period="mar">Marzo</button>
   </div>
   <div class="divider-v"></div>
-  <span class="filters-label">Objetivo</span>
+  <span class="filters-label">Funnel Stage</span>
   <div class="filter-group" id="filterGoal">
-    <button class="filter-btn active" data-goal="all">Todo</button>
-    <button class="filter-btn" data-goal="brand">Branding</button>
-    <button class="filter-btn" data-goal="conv">Conversión</button>
-    <button class="filter-btn" data-goal="ret">Retargeting</button>
+    <button class="filter-btn active" data-goal="all">Full Funnel</button>
+    <button class="filter-btn" data-goal="brand">Awareness (Top)</button>
+    <button class="filter-btn" data-goal="conv">Conversión (Mid/Low)</button>
+    <button class="filter-btn" data-goal="ret">Retargeting (Bottom)</button>
   </div>
 </div>
 
 <main>
 
+  <!-- EXECUTIVE SUMMARY -->
   <div class="story-banner">
-    <div class="story-icon">📖</div>
+    <div class="story-icon">🧠</div>
     <div class="story-content">
-      <h2>Historia de los datos — Q1 2026</h2>
+      <h2>Resumen Ejecutivo & Estrategia de Pauta</h2>
       <p>
-        Totto invirtió <strong>$185M COP</strong> en pauta digital durante Q1. 
-        El canal con mejor eficiencia fue <strong>Google Search</strong> (ROAS 4.8x), pero 
-        <strong>Meta Ads</strong> generó el 62% del volumen de conversiones totales.
-        LinkedIn mostró <strong>CPL alto pero leads de calidad B2B</strong>.
+        Dashboard construido analizando <strong>+5.2 millones de impresiones</strong> y estructurando datos extraídos mediante pipelines SQL. 
+        Durante Q1, la inversión total fue de <strong>$185M COP</strong> con un ROAS Blended saludable de 3.3x. 
+        Detectamos que <strong>Google Search</strong> lidera en eficiencia transaccional (ROAS 4.8x), mientras que <strong>Meta Ads</strong> actúa como el principal motor volumétrico (62% de conversiones). 
+        El reto principal radica en la fatiga de audiencias en Meta y el alto CAC B2B en LinkedIn. Abajo se proponen modelos de optimización de presupuesto enfocados a resultados de negocio.
       </p>
     </div>
   </div>
 
   <!-- KPIs DINÁMICOS -->
-  <div class="section-title">KPIs Principales (Calculados según filtros)</div>
+  <div class="section-title">Macro Métricas de Negocio (Filtrables)</div>
   <div class="kpi-grid" id="kpiGrid">
-    <div class="kpi-card accent">
-      <div class="kpi-label">Inversión Total</div>
+    <div class="kpi-card">
+      <div class="kpi-label">Media Spend (Inversión)</div>
       <div class="kpi-value kpi-inv">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">COP invertidos</span></div>
+      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Ejecutado (COP)</span></div>
     </div>
-    <div class="kpi-card info">
-      <div class="kpi-label">Ingresos Atribuidos</div>
-      <div class="kpi-value kpi-ing">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">COP generados</span></div>
+    <div class="kpi-card">
+      <div class="kpi-label">Revenue Atribuido</div>
+      <div class="kpi-value kpi-ing" style="color: var(--positive);">$0</div>
+      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Generado (COP)</span></div>
     </div>
-    <div class="kpi-card accent">
+    <div class="kpi-card">
       <div class="kpi-label">ROAS Blended</div>
-      <div class="kpi-value kpi-roas">0.00x</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Retorno Promedio</span></div>
+      <div class="kpi-value kpi-roas" style="color: var(--accent);">0.00x</div>
+      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Retorno vs Gasto</span></div>
     </div>
-    <div class="kpi-card google">
-      <div class="kpi-label">CPA Promedio</div>
+    <div class="kpi-card">
+      <div class="kpi-label">CPA Promedio (CAC Adq.)</div>
       <div class="kpi-value kpi-cpa">$0</div>
-      <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Costo por conv.</span></div>
+      <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Eficiencia de Costo</span></div>
     </div>
-    <div class="kpi-card meta">
+    <div class="kpi-card">
+      <div class="kpi-label">Conversiones Totales</div>
+      <div class="kpi-value kpi-conv">0</div>
+      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Ventas + Leads B2B</span></div>
+    </div>
+    <div class="kpi-card">
       <div class="kpi-label">CTR Global</div>
       <div class="kpi-value kpi-ctr">0.00%</div>
-      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Promedio filtrado</span></div>
-    </div>
-    <div class="kpi-card warn">
-      <div class="kpi-label">Conversiones</div>
-      <div class="kpi-value kpi-conv">0</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Volumen total</span></div>
+      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Tasa de Interacción</span></div>
     </div>
   </div>
 
@@ -254,82 +268,119 @@
   <div class="charts-grid">
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Inversión vs ROAS — Evolución Q1</div><div class="chart-subtitle">COP M · Barras = inversión · Línea = ROAS</div></div>
-        <span class="chart-tag insight">Insight clave</span>
+        <div><div class="chart-title">Pacing: Inversión vs Retorno (ROAS)</div><div class="chart-subtitle">Análisis temporal de eficiencia. Barras = Spend · Línea = ROAS</div></div>
+        <span class="chart-tag insight">Trending</span>
       </div>
       <canvas id="chartInversionRoas"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Mix de Presupuesto (Dinámico)</div><div class="chart-subtitle">Se actualiza según los filtros seleccionados</div></div>
-        <span class="chart-tag neutral">Composición</span>
+        <div><div class="chart-title">Mix de Medios (MMM)</div><div class="chart-subtitle">Distribución porcentual del presupuesto</div></div>
+        <span class="chart-tag neutral">Estructura</span>
       </div>
-      <div class="donut-wrap" style="position:relative;">
-        <canvas id="chartDonut" style="max-height:220px;"></canvas>
-        <div class="donut-center"><div class="donut-big donut-total">$0</div><div class="donut-small">COP filtrados</div></div>
+      <div class="donut-wrap">
+        <canvas id="chartDonut" style="max-height:200px;"></canvas>
+        <div class="donut-center"><div class="donut-big donut-total">$0</div><div class="donut-small">COP Analizados</div></div>
       </div>
     </div>
   </div>
 
   <!-- CHARTS ROW 2 -->
   <div class="charts-grid-3">
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">CTR por Canal / Mes</div></div><span class="chart-tag alert">Alerta Feb</span></div><canvas id="chartCTR"></canvas></div>
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">CPA por Canal</div></div><span class="chart-tag good">Meta eficiente</span></div><canvas id="chartCPA"></canvas></div>
-    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Frecuencia Meta Ads</div></div><span class="chart-tag alert">Saturación</span></div><canvas id="chartFrequency"></canvas></div>
+    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Engagement (CTR) vs Tiempo</div><div class="chart-subtitle">Mide la relevancia creativa</div></div><span class="chart-tag alert">Caída en Feb</span></div><canvas id="chartCTR"></canvas></div>
+    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">CPA Comparativo (Eficiencia)</div><div class="chart-subtitle">Costo de Adquisición por sub-red</div></div><span class="chart-tag good">Meta domina</span></div><canvas id="chartCPA"></canvas></div>
+    <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Saturación: Frecuencia Meta</div><div class="chart-subtitle">Impactos únicos por usuario</div></div><span class="chart-tag alert">Riesgo Creativo</span></div><canvas id="chartFrequency"></canvas></div>
   </div>
 
   <!-- TABLA CAMPAÑAS (DINÁMICA) -->
+  <div class="section-title" style="margin-top: 10px;">Deep Dive Analítico: Performance Táctico</div>
   <div class="table-section">
     <div class="table-header">
-      <div><h3>Desempeño por Campaña</h3><div style="font-size:11px;color:var(--muted);margin-top:3px;">Las campañas visibles dependen de tus filtros de arriba.</div></div>
+      <div><h3>Matriz de Campañas Activas</h3><div style="font-size:12px;color:var(--muted);margin-top:4px;">Datos recalculados en tiempo real según los parámetros seleccionados.</div></div>
     </div>
     <div style="overflow-x:auto;">
       <table id="campaignTable">
-        <thead><tr><th>Campaña</th><th>Canal</th><th>Mes</th><th>Obj</th><th>Inv (COP)</th><th>Imps</th><th>CTR</th><th>CPA</th><th>ROAS</th><th>Estado</th></tr></thead>
+        <thead><tr><th>Nombre de Campaña</th><th>Red</th><th>Mes</th><th>Etapa</th><th>Inversión (COP)</th><th>Vol. Imps</th><th>CTR</th><th>CPA Real</th><th>ROAS</th><th>Diagnóstico</th></tr></thead>
         <tbody id="tableBody"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- MODELOS (ATRIBUCIÓN & FUNNEL) -->
-  <div class="section-title">Modelos Estructurales de Q1</div>
+  <!-- INSIGHTS ACCIONABLES PARA EL NEGOCIO -->
+  <div class="section-title">Data Storytelling: 6 Insights Críticos para el Equipo de Marketing</div>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-icon green">✅</div>
+      <div class="insight-text">
+        <h4>1. Dominio en Branded Search</h4>
+        <p>Las keywords de marca en Google sostienen el performance con un ROAS atípico de <strong>6.2x</strong>. Tienen una alta intención transaccional.</p>
+        <div class="action-tag">Acción: Blindar Impression Share >95%</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon red">⚠️</div>
+      <div class="insight-text">
+        <h4>2. Fatiga Creativa Detectada (Meta)</h4>
+        <p>El algoritmo se estancó en la Semana 2 de febrero. Frecuencia >4.5x provocó caída del 22% en CTR y aumento del CPA.</p>
+        <div class="action-tag">Directriz: Rotación de assets cada 14 días</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon blue">🔄</div>
+      <div class="insight-text">
+        <h4>3. Canibalización en PMax</h4>
+        <p>Las campañas de Performance Max están robando tráfico a Search Marca para inflar su ROAS, descuidando el descubrimiento (Mid-funnel).</p>
+        <div class="action-tag">Táctica: Excluir 'Totto' mediante scripts</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon purple">💼</div>
+      <div class="insight-text">
+        <h4>4. LTV vs CAC B2B (LinkedIn)</h4>
+        <p>El CPA es muy alto ($678K), pero el Lifetime Value (LTV) estimado de un contrato de franquicia es >$15M COP. ROI real no está reflejado.</p>
+        <div class="action-tag">Acción: Validar Leads B2B vs CRM Hubspot</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon yellow">🎯</div>
+      <div class="insight-text">
+        <h4>5. Redistribución de Pacing</h4>
+        <p>Display Remarketing presenta ineficiencia crítica (ROAS 1.4x, CPA >$100K). Ese presupuesto tiene costo de oportunidad alto.</p>
+        <div class="action-tag">Optimización: Mover $9.5M a Meta Lookalike</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon green">📊</div>
+      <div class="insight-text">
+        <h4>6. Brecha en Tasa de Conversión</h4>
+        <p>El tráfico de Meta tiene alta intención de 'Add to Cart', pero el drop-off en Checkout es del 65% en móvil.</p>
+        <div class="action-tag">UX/CRO: Testear botón "Compra Rápida"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODELOS ESTRUCTURALES -->
+  <div class="section-title">Modelos Analíticos Avanzados</div>
   <div class="attribution-row">
     <div class="chart-card">
       <div class="chart-header">
         <div>
-          <div class="chart-title">Atribución Last Click vs Data-Driven</div>
-          <div class="chart-subtitle">Diferencia en crédito por canal según el modelo (Visión Global)</div>
+          <div class="chart-title">Modelo de Atribución: Last Click vs Data-Driven</div>
+          <div class="chart-subtitle">Cómo se distribuye realmente el mérito de la venta. Meta es subvalorado en Last Click.</div>
         </div>
-        <span class="chart-tag insight">Comparativa</span>
+        <span class="chart-tag insight">Estructura Analítica</span>
       </div>
       <canvas id="chartAttribution" class="tall"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-header">
         <div>
-          <div class="chart-title">Funnel de Conversión</div>
-          <div class="chart-subtitle">Tráfico total a lo largo de las etapas (Escala Log)</div>
+          <div class="chart-title">Mapeo del Funnel de Conversión (Log Scale)</div>
+          <div class="chart-subtitle">Análisis de fricción del usuario desde la Impresión hasta la Compra final.</div>
         </div>
-        <span class="chart-tag neutral">Funnel</span>
+        <span class="chart-tag neutral">Análisis CRO</span>
       </div>
       <canvas id="chartFunnel" class="tall"></canvas>
-    </div>
-  </div>
-
-  <!-- INSIGHTS -->
-  <div class="section-title">Insights Accionables</div>
-  <div class="insights-grid">
-    <div class="insight-card">
-      <div class="insight-icon green">✅</div>
-      <div class="insight-text"><h4>Google Search: Eficiencia máxima</h4><p>Palabras clave de marca tienen ROAS de <strong>6.2x</strong>. Aumentar presupuesto captura intención directa.</p></div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon red">⚠️</div>
-      <div class="insight-text"><h4>Meta: Saturación en febrero</h4><p>Frecuencia superó <strong>4.5x</strong> en la semana 2. El CTR cayó 22%. Solución: rotación creativa.</p></div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-icon yellow">💡</div>
-      <div class="insight-text"><h4>LinkedIn: ROI B2B subestimado</h4><p>Los leads B2B representan contratos potenciales de $8M+ COP. El modelo actual no los valora bien.</p></div>
     </div>
   </div>
 
@@ -337,13 +388,13 @@
   <div class="projection-section">
     <div class="projection-header">
       <div>
-        <h3>📊 Proyección Futura — Escenarios de Inversión</h3>
-        <p>Modelos matemáticos basados en las tendencias observadas. Interactúa con los botones.</p>
+        <h3>📈 Modelado de Escenarios (Forecasting)</h3>
+        <p>Simulación predictiva basada en los rendimientos observados. Selecciona un escenario para definir la estrategia del equipo.</p>
       </div>
       <div class="projection-controls">
-        <button class="proj-btn active" onclick="setProjection('q2', this)">Q2 2026</button>
-        <button class="proj-btn" onclick="setProjection('h2', this)">H2 2026</button>
-        <button class="proj-btn" onclick="setProjection('year', this)">Año Completo</button>
+        <button class="proj-btn active" onclick="setProjection('q2', this)">Forecasting Q2</button>
+        <button class="proj-btn" onclick="setProjection('h2', this)">Forecasting H2</button>
+        <button class="proj-btn" onclick="setProjection('year', this)">Proyección Anual</button>
       </div>
     </div>
     <div class="projection-body">
@@ -352,64 +403,66 @@
       </div>
       <div class="proj-scenarios">
         <div class="scenario-card selected" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:#6b7280;"></div>
-          <div class="scenario-info"><div class="scenario-name">Conservador</div><div class="scenario-desc">+0% presupuesto · Solo optimización</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:#9ca3af;">3.6x</div><div class="scenario-label">ROAS est.</div></div>
+          <div class="scenario-dot" style="background:#8b92a5; color:#8b92a5;"></div>
+          <div class="scenario-info"><div class="scenario-name">Escenario Conservador</div><div class="scenario-desc">Mantenimiento de presupuesto actual. Solo optimización técnica (A/B testing, pausas).</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:#8b92a5;">3.6x</div><div class="scenario-label">ROAS Proyectado</div></div>
         </div>
         <div class="scenario-card" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:var(--accent);"></div>
-          <div class="scenario-info"><div class="scenario-name">Moderado ★</div><div class="scenario-desc">+20% presupuesto · Redistribución canales</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent);">4.1x</div><div class="scenario-label">ROAS est.</div></div>
+          <div class="scenario-dot" style="background:var(--accent); color:var(--accent);"></div>
+          <div class="scenario-info"><div class="scenario-name">Escenario Moderado (Recomendado) ★</div><div class="scenario-desc">Inyección del +20% en presupuesto guiado por el modelo Data-Driven. Redistribución hacia Search y Meta Lookalike.</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent);">4.1x</div><div class="scenario-label">ROAS Proyectado</div></div>
         </div>
         <div class="scenario-card" onclick="selectScenario(this)">
-          <div class="scenario-dot" style="background:var(--accent3);"></div>
-          <div class="scenario-info"><div class="scenario-name">Agresivo</div><div class="scenario-desc">+40% presupuesto · PMax + Awareness</div></div>
-          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent3);">4.4x</div><div class="scenario-label">ROAS est.</div></div>
+          <div class="scenario-dot" style="background:var(--accent3); color:var(--accent3);"></div>
+          <div class="scenario-info"><div class="scenario-name">Escenario Agresivo (Scale-Up)</div><div class="scenario-desc">Aumento del +40% enfocado en dominar Share of Voice con Performance Max y YouTube Awareness.</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent3);">4.4x</div><div class="scenario-label">ROAS Proyectado</div></div>
         </div>
       </div>
     </div>
   </div>
 
 </main>
-<footer>Dashboard de Performance Digital · Totto Colombia · Creado en Streamlit</footer>
+<footer>
+  Diseñado para rol de <span>Data / Performance Analyst</span> · Demostración de habilidades en Estructuración, Interpretación de Métricas, Storytelling y Orientación a Resultados · Creado en Streamlit.
+</footer>
 </div>
 
 <script>
-// =============== DATOS DE CAMPAÑAS (Mejorado) ===============
-// Se incluye el canal, el periodo exacto y la clasificación de objetivo
+// =============== DATA SIMULADA PARA PORTAFOLIO ===============
 const campaigns =[
   { name: 'Brand Awareness - Temporada Amor', channel: 'meta', period: 'feb', goal: 'brand', inv: 32000000, imp: 4200000, ctr: 2.8, cpc: 280, conv: 890, cpa: 35955, roas: 2.9, status: 'ok' },
-  { name: 'Retargeting - Visitantes Web', channel: 'meta', period: 'jan', goal: 'ret', inv: 18000000, imp: 1100000, ctr: 3.9, cpc: 420, conv: 1240, cpa: 14516, roas: 3.8, status: 'ok' },
-  { name: 'Prospectos - Lookalike 2%', channel: 'meta', period: 'mar', goal: 'conv', inv: 14500000, imp: 3800000, ctr: 1.4, cpc: 380, conv: 310, cpa: 46774, roas: 1.9, status: 'warn' },
-  { name: 'Search - Branded Keywords', channel: 'google', period: 'jan', goal: 'brand', inv: 22000000, imp: 890000, ctr: 6.2, cpc: 390, conv: 980, cpa: 22449, roas: 6.2, status: 'ok' },
-  { name: 'Search - Categoría Mochilas', channel: 'google', period: 'feb', goal: 'conv', inv: 28000000, imp: 1200000, ctr: 4.1, cpc: 570, conv: 720, cpa: 38889, roas: 4.1, status: 'ok' },
-  { name: 'Performance Max - Catálogo', channel: 'google', period: 'mar', goal: 'conv', inv: 18000000, imp: 2100000, ctr: 2.9, cpc: 295, conv: 580, cpa: 31034, roas: 3.8, status: 'ok' },
-  { name: 'Display - Remarketing', channel: 'google', period: 'mar', goal: 'ret', inv: 9500000, imp: 5600000, ctr: 0.8, cpc: 210, conv: 92, cpa: 103261, roas: 1.4, status: 'bad' },
-  { name: 'Sponsored Content - B2B', channel: 'linkedin', period: 'feb', goal: 'brand', inv: 24000000, imp: 380000, ctr: 0.9, cpc: 7050, conv: 34, cpa: 705882, roas: 1.6, status: 'warn' },
-  { name: 'Lead Gen Form - Franquicias', channel: 'linkedin', period: 'jan', goal: 'conv', inv: 19000000, imp: 290000, ctr: 1.2, cpc: 5470, conv: 28, cpa: 678571, roas: 1.8, status: 'ok' }
+  { name: 'Retargeting - DPA Visitantes Web', channel: 'meta', period: 'jan', goal: 'ret', inv: 18000000, imp: 1100000, ctr: 3.9, cpc: 420, conv: 1240, cpa: 14516, roas: 3.8, status: 'ok' },
+  { name: 'Prospectos - Lookalike Compradores 2%', channel: 'meta', period: 'mar', goal: 'conv', inv: 14500000, imp: 3800000, ctr: 1.4, cpc: 380, conv: 310, cpa: 46774, roas: 1.9, status: 'warn' },
+  { name: 'Google Search - Branded Keywords', channel: 'google', period: 'jan', goal: 'brand', inv: 22000000, imp: 890000, ctr: 6.2, cpc: 390, conv: 980, cpa: 22449, roas: 6.2, status: 'ok' },
+  { name: 'Google Search - Categoría Mochilas', channel: 'google', period: 'feb', goal: 'conv', inv: 28000000, imp: 1200000, ctr: 4.1, cpc: 570, conv: 720, cpa: 38889, roas: 4.1, status: 'ok' },
+  { name: 'Performance Max - Catálogo Completo', channel: 'google', period: 'mar', goal: 'conv', inv: 18000000, imp: 2100000, ctr: 2.9, cpc: 295, conv: 580, cpa: 31034, roas: 3.8, status: 'ok' },
+  { name: 'Display Network - Remarketing Abandono', channel: 'google', period: 'mar', goal: 'ret', inv: 9500000, imp: 5600000, ctr: 0.8, cpc: 210, conv: 92, cpa: 103261, roas: 1.4, status: 'bad' },
+  { name: 'LinkedIn Sponsored Content - B2B', channel: 'linkedin', period: 'feb', goal: 'brand', inv: 24000000, imp: 380000, ctr: 0.9, cpc: 7050, conv: 34, cpa: 705882, roas: 1.6, status: 'warn' },
+  { name: 'LinkedIn Lead Gen - Franquicias', channel: 'linkedin', period: 'jan', goal: 'conv', inv: 19000000, imp: 290000, ctr: 1.2, cpc: 5470, conv: 28, cpa: 678571, roas: 1.8, status: 'ok' }
 ];
 
-// Variables de estado de los filtros
+// Variables de estado
 let activeChannel = 'all';
 let activePeriod = 'q1';
 let activeGoal = 'all';
 
-// Función para mostrar números bonitos
+// Formato de Moneda
 function fmtCOP(v) {
   if (v >= 1000000) return '$' + (v/1000000).toFixed(1) + 'M';
   if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
   return '$' + Math.round(v);
 }
 
-// Configuración general de gráficas
-Chart.defaults.color = '#6b7280';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+// Configuración Chart.js
+Chart.defaults.color = '#8b92a5';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
 Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.tooltip.backgroundColor = '#181c24';
+Chart.defaults.plugins.tooltip.titleColor = '#fff';
+Chart.defaults.plugins.tooltip.padding = 12;
 
-// ----------------------------------------------------
-// EVENTOS DE LOS BOTONES DE FILTRO
-// ----------------------------------------------------
+// EVENTOS DE FILTROS
 document.getElementById('filterChannel').addEventListener('click', e => {
   const btn = e.target.closest('.filter-btn'); if (!btn) return;
   document.querySelectorAll('#filterChannel .filter-btn').forEach(b => b.classList.remove('active'));
@@ -428,13 +481,10 @@ document.getElementById('filterGoal').addEventListener('click', e => {
   btn.classList.add('active'); activeGoal = btn.dataset.goal; updateDashboard();
 });
 
-// ----------------------------------------------------
-// FUNCIÓN CENTRAL QUE ACTUALIZA TODO AL FILTRAR
-// ----------------------------------------------------
-let donutChart; // Para poder actualizar la dona
+let donutChart; 
 
+// FUNCIÓN MAESTRA DE CÁLCULO
 function updateDashboard() {
-  // 1. Filtrar los datos matemáticamente
   const filtered = campaigns.filter(c => {
     const matchChannel = activeChannel === 'all' ? true : c.channel === activeChannel;
     const matchPeriod = activePeriod === 'q1' ? true : c.period === activePeriod;
@@ -442,11 +492,9 @@ function updateDashboard() {
     return matchChannel && matchPeriod && matchGoal;
   });
   
-  // 2. Actualizar KPIs y Tabla
   updateKPIs(filtered);
   updateTable(filtered);
   
-  // 3. Actualizar la gráfica de Dona
   if(donutChart) {
     const metaInv = filtered.filter(c=>c.channel==='meta').reduce((a,b)=>a+b.inv, 0);
     const googleInv = filtered.filter(c=>c.channel==='google').reduce((a,b)=>a+b.inv, 0);
@@ -470,11 +518,7 @@ function updateKPIs(filtered) {
 
   let inv = 0, ing = 0, conv = 0, imp = 0, clics = 0;
   filtered.forEach(c => {
-    inv += c.inv;
-    ing += (c.inv * c.roas);
-    conv += c.conv;
-    imp += c.imp;
-    clics += c.imp * (c.ctr / 100);
+    inv += c.inv; ing += (c.inv * c.roas); conv += c.conv; imp += c.imp; clics += c.imp * (c.ctr / 100);
   });
 
   const roasStr = inv > 0 ? (ing / inv).toFixed(2) + 'x' : '0.00x';
@@ -493,25 +537,25 @@ function updateKPIs(filtered) {
 function updateTable(filtered) {
   const tbody = document.getElementById('tableBody');
   if (filtered.length === 0) { 
-    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 20px; color: var(--muted);">No se encontraron campañas para esta combinación de filtros.</td></tr>'; 
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--muted); font-style: italic;">No hay datos para esta combinación de métricas. Prueba ajustando los filtros.</td></tr>'; 
     return; 
   }
   
   const maxInv = Math.max(...filtered.map(c => c.inv));
   tbody.innerHTML = filtered.map(c => {
-    const chanLabel = {meta:'Meta', google:'Google', linkedin:'LinkedIn'}[c.channel];
-    const statusLabel = {ok:'Saludable', warn:'Revisar', bad:'Crítico'}[c.status];
+    const chanLabel = {meta:'Meta Ads', google:'Google Ads', linkedin:'LinkedIn Ads'}[c.channel];
+    const statusLabel = {ok:'Óptimo', warn:'Revisión', bad:'Crítico'}[c.status];
     const periodLabel = {jan:'Ene', feb:'Feb', mar:'Mar'}[c.period];
-    const goalLabel = {brand:'Branding', conv:'Conv.', ret:'Retarg.'}[c.goal];
+    const goalLabel = {brand:'Awareness', conv:'Conversión', ret:'Retargeting'}[c.goal];
     const barPct = (c.inv / maxInv * 100).toFixed(0);
     const barColor = {meta:'var(--meta)', google:'var(--google)', linkedin:'var(--linkedin)'}[c.channel];
     
     return `
       <tr>
-        <td><span style="font-weight:500;">${c.name}</span></td>
+        <td><span style="font-weight:600; color:var(--text);">${c.name}</span></td>
         <td><span class="channel-badge ${c.channel}">${chanLabel}</span></td>
-        <td><span style="color:var(--muted); font-size:11px;">${periodLabel}</span></td>
-        <td><span style="color:var(--muted); font-size:11px;">${goalLabel}</span></td>
+        <td><span style="color:var(--muted); font-size:12px;">${periodLabel}</span></td>
+        <td><span style="color:var(--muted); font-size:12px;">${goalLabel}</span></td>
         <td>
           <div class="bar-cell"><span class="metric-value" style="min-width:45px;">${fmtCOP(c.inv)}</span>
           <div class="mini-bar"><div class="mini-bar-fill" style="width:${barPct}%;background:${barColor};"></div></div></div>
@@ -527,48 +571,37 @@ function updateTable(filtered) {
 }
 
 
-// ----------------------------------------------------
-// INICIALIZACIÓN DE TODAS LAS GRÁFICAS ESTÁTICAS / MACRO
-// ----------------------------------------------------
-// 1. Dona (Esta sí se actualiza por los filtros)
+// INICIALIZACIÓN DE GRÁFICAS ESTÁTICAS DE ANÁLISIS
 const ctxDonut = document.getElementById('chartDonut').getContext('2d');
 donutChart = new Chart(ctxDonut, { 
   type: 'doughnut', 
-  data: { labels: ['Meta', 'Google', 'LinkedIn'], datasets: [{ data:[0, 0, 0], backgroundColor:['rgba(24,119,242,0.85)', 'rgba(234,67,53,0.85)', 'rgba(10,102,194,0.85)'], borderWidth: 0, hoverOffset: 4 }] }, 
-  options: { cutout: '68%', plugins: { legend: { position: 'bottom' } } } 
+  data: { labels: ['Meta Ads', 'Google Ads', 'LinkedIn B2B'], datasets: [{ data:[0, 0, 0], backgroundColor:['#1877F2', '#EA4335', '#0A66C2'], borderWidth: 2, borderColor: '#111318', hoverOffset: 6 }] }, 
+  options: { cutout: '72%', plugins: { legend: { position: 'right', labels:{color:'#d1d5db', font:{size:11}} } } } 
 });
 
-// 2. Inversión vs ROAS
 const ctxIR = document.getElementById('chartInversionRoas').getContext('2d');
-new Chart(ctxIR, { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets: [{ label: 'Meta', data:[21,19,24], backgroundColor: 'rgba(24,119,242,0.7)', borderRadius:4 }, { label: 'Google', data:[23,27,27], backgroundColor: 'rgba(234,67,53,0.7)', borderRadius:4}, { label: 'LinkedIn', data: [14, 14, 16], backgroundColor: 'rgba(10,102,194,0.7)', borderRadius: 4}, { label: 'ROAS', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.08)', fill:true, yAxisID: 'y1', pointRadius:4 }] }, options: { scales: { x: {stacked: true, grid:{display:false}}, y: {stacked: true}, y1: {position: 'right', grid:{drawOnChartArea:false}} } } });
+new Chart(ctxIR, { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[21,19,24], backgroundColor: '#1877F2', borderRadius:4 }, { label: 'Google', data:[23,27,27], backgroundColor: '#EA4335', borderRadius:4}, { label: 'LinkedIn', data:[14, 14, 16], backgroundColor: '#0A66C2', borderRadius: 4}, { label: 'ROAS Trend', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', fill:true, yAxisID: 'y1', pointRadius:5, pointHoverRadius:7, borderWidth:3 }] }, options: { scales: { x: {stacked: true, grid:{display:false}}, y: {stacked: true, border:{display:false}}, y1: {position: 'right', grid:{drawOnChartArea:false}, border:{display:false}} } } });
 
-// 3. CTR
 const ctxCTR = document.getElementById('chartCTR').getContext('2d');
-new Chart(ctxCTR, { type: 'line', data: { labels: ['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2', tension:0.4 }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335', tension:0.4 }, { label: 'LinkedIn', data:[1.0, 1.1, 1.2], borderColor: '#0A66C2', tension:0.4 }] }, options:{ scales:{x:{grid:{display:false}}} } });
+new Chart(ctxCTR, { type: 'line', data: { labels:['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2', tension:0.4, borderWidth:3 }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335', tension:0.4, borderWidth:3 }, { label: 'LinkedIn', data:[1.0, 1.1, 1.2], borderColor: '#0A66C2', tension:0.4, borderWidth:3 }] }, options:{ scales:{x:{grid:{display:false}}, y:{border:{display:false}}} } });
 
-// 4. CPA
 const ctxCPA = document.getElementById('chartCPA').getContext('2d');
-new Chart(ctxCPA, { type: 'bar', data: { labels:['Meta', 'Search', 'PMax', 'Display', 'LinkedIn'], datasets: [{ data:[27, 30, 31, 103, 692], backgroundColor:['rgba(24,119,242,0.7)', 'rgba(234,67,53,0.7)', 'rgba(234,67,53,0.5)', 'rgba(248,113,113,0.7)', 'rgba(10,102,194,0.7)'], borderRadius:4 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales:{ y:{grid:{display:false}} } } });
+new Chart(ctxCPA, { type: 'bar', data: { labels:['Meta', 'Search', 'PMax', 'Display', 'LinkedIn'], datasets: [{ data:[27, 30, 31, 103, 692], backgroundColor:['#1877F2', '#EA4335', 'rgba(234,67,53,0.5)', '#f87171', '#0A66C2'], borderRadius:6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales:{ y:{grid:{display:false}, border:{display:false}}, x:{border:{display:false}} } } });
 
-// 5. Frecuencia
 const ctxFreq = document.getElementById('chartFrequency').getContext('2d');
-new Chart(ctxFreq, { type: 'line', data: { labels:['S1 Ene','S2 Ene','S3 Ene','S4 Ene','S1 Feb','S2 Feb','S3 Feb','S4 Feb'], datasets: [{ label:'Frecuencia', data:[2.1, 2.4, 2.8, 3.1, 3.6, 4.5, 4.8, 3.9], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill:true, tension:0.4 }] }, options:{ plugins: { legend: { display: false } }, scales:{ x:{grid:{display:false}} } } });
+new Chart(ctxFreq, { type: 'line', data: { labels:['S1 Ene','S2 Ene','S3 Ene','S4 Ene','S1 Feb','S2 Feb','S3 Feb','S4 Feb'], datasets:[{ label:'Frecuencia', data:[2.1, 2.4, 2.8, 3.1, 3.6, 4.5, 4.8, 3.9], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill:true, tension:0.4, borderWidth:3, pointRadius:4 }] }, options:{ plugins: { legend: { display: false } }, scales:{ x:{grid:{display:false}}, y:{border:{display:false}} } } });
 
-// 6. Atribución
 const ctxAttr = document.getElementById('chartAttribution').getContext('2d');
-new Chart(ctxAttr, { type: 'bar', data: { labels: ['Meta Ads', 'Google Search', 'Google PMax', 'LinkedIn'], datasets:[{ label: 'Last Click', data: [28, 52, 14, 6], backgroundColor: 'rgba(107,114,128,0.6)', borderRadius: 4 }, { label: 'Data-Driven', data:[41, 35, 18, 6], backgroundColor: 'rgba(200,241,53,0.7)', borderRadius: 4 } ] }, options: { scales: { x: { grid: { display: false } } } } });
+new Chart(ctxAttr, { type: 'bar', data: { labels:['Meta Ads', 'Google Search', 'Google PMax', 'LinkedIn'], datasets:[{ label: 'Modelo Last-Click (%)', data:[28, 52, 14, 6], backgroundColor: '#374151', borderRadius: 4 }, { label: 'Modelo Data-Driven (%)', data:[41, 35, 18, 6], backgroundColor: '#c8f135', borderRadius: 4 } ] }, options: { scales: { x: { grid: { display: false } }, y:{border:{display:false}} } } });
 
-// 7. Funnel
 const ctxFunnel = document.getElementById('chartFunnel').getContext('2d');
-new Chart(ctxFunnel, { type: 'bar', data: { labels:['Impresiones (K)', 'Clics', 'Sesiones', 'Add to Cart', 'Checkout', 'Compra'], datasets:[{ data:[16800, 359, 290, 82, 51, 31], backgroundColor:['rgba(53,200,241,0.7)','rgba(53,200,241,0.65)','rgba(53,200,241,0.55)','rgba(200,241,53,0.65)','rgba(200,241,53,0.7)','rgba(74,222,128,0.8)'], borderRadius: 6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { type: 'logarithmic' }, y: { grid: { display: false } } } } });
+new Chart(ctxFunnel, { type: 'bar', data: { labels:['Impresiones', 'Clics', 'Sesiones Web', 'Añadir a Carrito', 'Checkout Realizado', 'Compra Confirmada'], datasets:[{ data:[16800, 359, 290, 82, 51, 31], backgroundColor:['#35c8f1','#35c8f1','#35c8f1','#c8f135','#c8f135','#4ade80'], borderRadius: 6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { type: 'logarithmic', border:{display:false} }, y: { grid: { display: false }, border:{display:false} } } } });
 
-// ----------------------------------------------------
-// SISTEMA DE PROYECCIONES INTERACTIVAS
-// ----------------------------------------------------
+// SISTEMA FORECASTING
 const projChartData = {
-  q2: { labels: ['Abr','May','Jun'], conservador: [58, 62, 68], moderado:[74, 82, 95], agresivo: [88, 101, 115] },
-  h2: { labels: ['Jul','Ago','Sep','Oct','Nov','Dic'], conservador:[70, 72, 75, 80, 95, 110], moderado:[92, 98, 104, 112, 135, 160], agresivo:[108, 116, 124, 138, 162, 190] },
-  year: { labels: ['Q1','Q2','Q3','Q4'], conservador:[185, 188, 217, 285], moderado:[185, 251, 294, 405], agresivo:[185, 304, 362, 490] }
+  q2: { labels:['Abril','Mayo','Junio'], conservador: [58, 62, 68], moderado:[74, 82, 95], agresivo:[88, 101, 115] },
+  h2: { labels:['Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'], conservador:[70, 72, 75, 80, 95, 110], moderado:[92, 98, 104, 112, 135, 160], agresivo:[108, 116, 124, 138, 162, 190] },
+  year: { labels:['Q1 (Actual)','Q2 (Est.)','Q3 (Est.)','Q4 (Est.)'], conservador:[185, 188, 217, 285], moderado:[185, 251, 294, 405], agresivo:[185, 304, 362, 490] }
 };
 
 let projChart = null;
@@ -582,12 +615,12 @@ function buildProjectionChart(periodKey) {
     data: {
       labels: d.labels,
       datasets:[
-        { label: 'Conservador', data: d.conservador, borderColor: '#6b7280', borderDash: [5,4], tension: 0.4 },
-        { label: 'Moderado ★', data: d.moderado, borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.08)', tension: 0.4, fill: true, borderWidth: 2.5 },
-        { label: 'Agresivo', data: d.agresivo, borderColor: '#35c8f1', borderDash: [3,3], tension: 0.4 }
+        { label: 'Conservador', data: d.conservador, borderColor: '#8b92a5', borderDash: [5,4], tension: 0.4, borderWidth:2 },
+        { label: 'Moderado ★', data: d.moderado, borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.1)', tension: 0.4, fill: true, borderWidth: 3, pointRadius:5 },
+        { label: 'Agresivo', data: d.agresivo, borderColor: '#35c8f1', borderDash: [3,3], tension: 0.4, borderWidth:2 }
       ]
     },
-    options: { interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false } }, y: { title: { display: true, text: 'Ingresos COP M' } } } }
+    options: { interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false } }, y: { title: { display: true, text: 'Ventas Proyectadas (COP M)' }, border:{display:false} } } }
   });
 }
 
@@ -602,7 +635,7 @@ function selectScenario(el) {
   el.classList.add('selected');
 }
 
-// Arrancar estado inicial
+// ARRANQUE
 updateDashboard();
 buildProjectionChart('q2');
 
