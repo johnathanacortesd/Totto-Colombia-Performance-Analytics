@@ -8,63 +8,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0a0c10;
-    --surface: #111318;
-    --surface2: #181c24;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8eaf0;
-    --muted: #6b7280;
-    --meta: #1877F2;
-    --google: #EA4335;
-    --linkedin: #0A66C2;
-    --accent: #c8f135;
-    --accent2: #f1c835;
-    --accent3: #35c8f1;
-    --positive: #4ade80;
-    --negative: #f87171;
-    --warning: #fbbf24;
-    --radius: 16px;
-    --radius-sm: 10px;
+    --bg: #0a0c10; --surface: #111318; --surface2: #181c24; --border: rgba(255,255,255,0.07);
+    --text: #e8eaf0; --muted: #6b7280; --meta: #1877F2; --google: #EA4335; --linkedin: #0A66C2;
+    --accent: #c8f135; --accent2: #f1c835; --accent3: #35c8f1; --positive: #4ade80;
+    --negative: #f87171; --warning: #fbbf24; --radius: 16px; --radius-sm: 10px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
   .everything { position: relative; z-index: 1; }
 
-  header {
-    background: linear-gradient(135deg, #0f1219 0%, #111826 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(20px);
-  }
-
+  header { background: linear-gradient(135deg, #0f1219 0%, #111826 100%); border-bottom: 1px solid var(--border); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); }
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand-logo { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), #8ef100); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #0a0c10; letter-spacing: -1px; }
   .brand-info h1 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
@@ -73,7 +28,6 @@
   .period-badge { background: rgba(200, 241, 53, 0.1); border: 1px solid rgba(200, 241, 53, 0.25); color: var(--accent); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
   .live-badge { display: flex; align-items: center; gap: 6px; background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.2); color: var(--positive); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; }
   .live-dot { width: 6px; height: 6px; background: var(--positive); border-radius: 50%; animation: pulse 2s infinite; }
-
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
   .filters-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -111,11 +65,11 @@
   .kpi-delta { display: flex; align-items: center; gap: 3px; font-weight: 600; font-size: 12px; }
   .kpi-delta.up { color: var(--positive); }
   .kpi-delta.down { color: var(--negative); }
+  .kpi-delta.neutral { color: var(--muted); }
   .kpi-sub { color: var(--muted); }
 
   .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
   .charts-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-  .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; }
   .chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; gap: 12px; }
   .chart-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
@@ -129,6 +83,35 @@
   canvas { max-height: 240px; }
   canvas.tall { max-height: 300px; }
 
+  .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+  .donut-wrap { position: relative; }
+  .donut-big { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
+  .donut-small { font-size: 11px; color: var(--muted); }
+
+  .table-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .table-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .table-header h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { padding: 12px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 13px 16px; font-size: 13px; vertical-align: middle; }
+  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  .channel-badge.meta { background: rgba(24,119,242,0.15); color: #60a5fa; }
+  .channel-badge.google { background: rgba(234,67,53,0.15); color: #f87171; }
+  .channel-badge.linkedin { background: rgba(10,102,194,0.15); color: #93c5fd; }
+  .metric-value { font-family: 'Syne', sans-serif; font-weight: 700; }
+  .bar-cell { display: flex; align-items: center; gap: 10px; }
+  .mini-bar { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+  .mini-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .status-pill { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-pill.ok { background: rgba(74,222,128,0.12); color: var(--positive); }
+  .status-pill.warn { background: rgba(251,191,36,0.12); color: var(--warning); }
+  .status-pill.bad { background: rgba(248,113,113,0.12); color: var(--negative); }
+
+  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  
   .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .insight-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.2s; }
   .insight-card:hover { border-color: rgba(255,255,255,0.15); }
@@ -162,54 +145,14 @@
   .scenario-roas { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
   .scenario-label { font-size: 10px; color: var(--muted); }
 
-  .table-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .table-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .table-header h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
-  table { width: 100%; border-collapse: collapse; }
-  thead th { padding: 12px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--surface2); }
-  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
-  tbody tr:hover { background: rgba(255,255,255,0.02); }
-  tbody tr:last-child { border-bottom: none; }
-  tbody td { padding: 13px 16px; font-size: 13px; vertical-align: middle; }
-  .channel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
-  .channel-badge.meta { background: rgba(24,119,242,0.15); color: #60a5fa; }
-  .channel-badge.google { background: rgba(234,67,53,0.15); color: #f87171; }
-  .channel-badge.linkedin { background: rgba(10,102,194,0.15); color: #93c5fd; }
-  .metric-value { font-family: 'Syne', sans-serif; font-weight: 700; }
-  .bar-cell { display: flex; align-items: center; gap: 10px; }
-  .mini-bar { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-  .mini-bar-fill { height: 100%; border-radius: 2px; }
-  .status-pill { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-  .status-pill.ok { background: rgba(74,222,128,0.12); color: var(--positive); }
-  .status-pill.warn { background: rgba(251,191,36,0.12); color: var(--warning); }
-  .status-pill.bad { background: rgba(248,113,113,0.12); color: var(--negative); }
-
-  .attribution-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   footer { text-align: center; padding: 24px; color: var(--muted); font-size: 11px; border-top: 1px solid var(--border); }
   .section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
   @media (max-width: 900px) {
     main { padding: 16px; }
-    .charts-grid, .charts-grid-3, .charts-grid-2, .attribution-row { grid-template-columns: 1fr; }
-    .projection-body { grid-template-columns: 1fr; }
-    .filters-bar { padding: 12px 16px; }
-    header { padding: 16px; }
+    .charts-grid, .charts-grid-3, .attribution-row, .projection-body { grid-template-columns: 1fr; }
   }
-
-  .kpi-card, .chart-card, .insight-card { animation: fadeUp 0.4s ease both; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .kpi-card:nth-child(1) { animation-delay: 0.05s; }
-  .kpi-card:nth-child(2) { animation-delay: 0.1s; }
-  .kpi-card:nth-child(3) { animation-delay: 0.15s; }
-  .kpi-card:nth-child(4) { animation-delay: 0.2s; }
-  .kpi-card:nth-child(5) { animation-delay: 0.25s; }
-  .kpi-card:nth-child(6) { animation-delay: 0.3s; }
-
-  .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
-  .donut-wrap { position: relative; }
-  .donut-big { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
-  .donut-small { font-size: 11px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -230,7 +173,7 @@
   </div>
 </header>
 
-<!-- FILTERS -->
+<!-- FILTROS -->
 <div class="filters-bar">
   <span class="filters-label">Canal</span>
   <div class="filter-group" id="filterChannel">
@@ -259,7 +202,6 @@
 
 <main>
 
-  <!-- STORYTELLING BANNER -->
   <div class="story-banner">
     <div class="story-icon">📖</div>
     <div class="story-content">
@@ -273,37 +215,37 @@
     </div>
   </div>
 
-  <!-- KPIs -->
-  <div class="section-title">KPIs Principales (Dinámicos)</div>
+  <!-- KPIs DINÁMICOS -->
+  <div class="section-title">KPIs Principales (Calculados según filtros)</div>
   <div class="kpi-grid" id="kpiGrid">
     <div class="kpi-card accent">
       <div class="kpi-label">Inversión Total</div>
-      <div class="kpi-value kpi-inv">$185M</div>
-      <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">COP</span></div>
+      <div class="kpi-value kpi-inv">$0</div>
+      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">COP invertidos</span></div>
     </div>
     <div class="kpi-card info">
       <div class="kpi-label">Ingresos Atribuidos</div>
-      <div class="kpi-value kpi-ing">$612M</div>
+      <div class="kpi-value kpi-ing">$0</div>
       <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">COP generados</span></div>
     </div>
     <div class="kpi-card accent">
       <div class="kpi-label">ROAS Blended</div>
-      <div class="kpi-value kpi-roas">3.31x</div>
+      <div class="kpi-value kpi-roas">0.00x</div>
       <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Retorno Promedio</span></div>
     </div>
     <div class="kpi-card google">
       <div class="kpi-label">CPA Promedio</div>
-      <div class="kpi-value kpi-cpa">$38.4K</div>
+      <div class="kpi-value kpi-cpa">$0</div>
       <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Costo por conv.</span></div>
     </div>
     <div class="kpi-card meta">
       <div class="kpi-label">CTR Global</div>
-      <div class="kpi-value kpi-ctr">2.14%</div>
-      <div class="kpi-footer"><span class="kpi-delta down">▼</span><span class="kpi-sub">Promedio</span></div>
+      <div class="kpi-value kpi-ctr">0.00%</div>
+      <div class="kpi-footer"><span class="kpi-delta neutral">•</span><span class="kpi-sub">Promedio filtrado</span></div>
     </div>
     <div class="kpi-card warn">
       <div class="kpi-label">Conversiones</div>
-      <div class="kpi-value kpi-conv">4,812</div>
+      <div class="kpi-value kpi-conv">0</div>
       <div class="kpi-footer"><span class="kpi-delta up">▲</span><span class="kpi-sub">Volumen total</span></div>
     </div>
   </div>
@@ -312,19 +254,19 @@
   <div class="charts-grid">
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Inversión vs ROAS — Evolución Q1</div><div class="chart-subtitle">COP miles · Barras = inversión · Línea = ROAS</div></div>
+        <div><div class="chart-title">Inversión vs ROAS — Evolución Q1</div><div class="chart-subtitle">COP M · Barras = inversión · Línea = ROAS</div></div>
         <span class="chart-tag insight">Insight clave</span>
       </div>
       <canvas id="chartInversionRoas"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Mix de Presupuesto</div><div class="chart-subtitle">Distribución por canal Q1</div></div>
+        <div><div class="chart-title">Mix de Presupuesto (Dinámico)</div><div class="chart-subtitle">Se actualiza según los filtros seleccionados</div></div>
         <span class="chart-tag neutral">Composición</span>
       </div>
       <div class="donut-wrap" style="position:relative;">
         <canvas id="chartDonut" style="max-height:220px;"></canvas>
-        <div class="donut-center"><div class="donut-big donut-total">$185M</div><div class="donut-small">COP filtrados</div></div>
+        <div class="donut-center"><div class="donut-big donut-total">$0</div><div class="donut-small">COP filtrados</div></div>
       </div>
     </div>
   </div>
@@ -336,10 +278,10 @@
     <div class="chart-card"><div class="chart-header"><div><div class="chart-title">Frecuencia Meta Ads</div></div><span class="chart-tag alert">Saturación</span></div><canvas id="chartFrequency"></canvas></div>
   </div>
 
-  <!-- TABLA CAMPAÑAS -->
+  <!-- TABLA CAMPAÑAS (DINÁMICA) -->
   <div class="table-section">
     <div class="table-header">
-      <div><h3>Desempeño por Campaña</h3><div style="font-size:11px;color:var(--muted);margin-top:3px;">Basado en los filtros seleccionados</div></div>
+      <div><h3>Desempeño por Campaña</h3><div style="font-size:11px;color:var(--muted);margin-top:3px;">Las campañas visibles dependen de tus filtros de arriba.</div></div>
     </div>
     <div style="overflow-x:auto;">
       <table id="campaignTable">
@@ -349,11 +291,92 @@
     </div>
   </div>
 
+  <!-- MODELOS (ATRIBUCIÓN & FUNNEL) -->
+  <div class="section-title">Modelos Estructurales de Q1</div>
+  <div class="attribution-row">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Atribución Last Click vs Data-Driven</div>
+          <div class="chart-subtitle">Diferencia en crédito por canal según el modelo (Visión Global)</div>
+        </div>
+        <span class="chart-tag insight">Comparativa</span>
+      </div>
+      <canvas id="chartAttribution" class="tall"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Funnel de Conversión</div>
+          <div class="chart-subtitle">Tráfico total a lo largo de las etapas (Escala Log)</div>
+        </div>
+        <span class="chart-tag neutral">Funnel</span>
+      </div>
+      <canvas id="chartFunnel" class="tall"></canvas>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-title">Insights Accionables</div>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-icon green">✅</div>
+      <div class="insight-text"><h4>Google Search: Eficiencia máxima</h4><p>Palabras clave de marca tienen ROAS de <strong>6.2x</strong>. Aumentar presupuesto captura intención directa.</p></div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon red">⚠️</div>
+      <div class="insight-text"><h4>Meta: Saturación en febrero</h4><p>Frecuencia superó <strong>4.5x</strong> en la semana 2. El CTR cayó 22%. Solución: rotación creativa.</p></div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon yellow">💡</div>
+      <div class="insight-text"><h4>LinkedIn: ROI B2B subestimado</h4><p>Los leads B2B representan contratos potenciales de $8M+ COP. El modelo actual no los valora bien.</p></div>
+    </div>
+  </div>
+
+  <!-- PROYECCIÓN INTERACTIVA -->
+  <div class="projection-section">
+    <div class="projection-header">
+      <div>
+        <h3>📊 Proyección Futura — Escenarios de Inversión</h3>
+        <p>Modelos matemáticos basados en las tendencias observadas. Interactúa con los botones.</p>
+      </div>
+      <div class="projection-controls">
+        <button class="proj-btn active" onclick="setProjection('q2', this)">Q2 2026</button>
+        <button class="proj-btn" onclick="setProjection('h2', this)">H2 2026</button>
+        <button class="proj-btn" onclick="setProjection('year', this)">Año Completo</button>
+      </div>
+    </div>
+    <div class="projection-body">
+      <div>
+        <canvas id="chartProjection" style="max-height:280px;"></canvas>
+      </div>
+      <div class="proj-scenarios">
+        <div class="scenario-card selected" onclick="selectScenario(this)">
+          <div class="scenario-dot" style="background:#6b7280;"></div>
+          <div class="scenario-info"><div class="scenario-name">Conservador</div><div class="scenario-desc">+0% presupuesto · Solo optimización</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:#9ca3af;">3.6x</div><div class="scenario-label">ROAS est.</div></div>
+        </div>
+        <div class="scenario-card" onclick="selectScenario(this)">
+          <div class="scenario-dot" style="background:var(--accent);"></div>
+          <div class="scenario-info"><div class="scenario-name">Moderado ★</div><div class="scenario-desc">+20% presupuesto · Redistribución canales</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent);">4.1x</div><div class="scenario-label">ROAS est.</div></div>
+        </div>
+        <div class="scenario-card" onclick="selectScenario(this)">
+          <div class="scenario-dot" style="background:var(--accent3);"></div>
+          <div class="scenario-info"><div class="scenario-name">Agresivo</div><div class="scenario-desc">+40% presupuesto · PMax + Awareness</div></div>
+          <div class="scenario-result"><div class="scenario-roas" style="color:var(--accent3);">4.4x</div><div class="scenario-label">ROAS est.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
+<footer>Dashboard de Performance Digital · Totto Colombia · Creado en Streamlit</footer>
 </div>
 
 <script>
-// =============== DATOS MEJORADOS CON PERIOD Y GOAL ===============
+// =============== DATOS DE CAMPAÑAS (Mejorado) ===============
+// Se incluye el canal, el periodo exacto y la clasificación de objetivo
 const campaigns =[
   { name: 'Brand Awareness - Temporada Amor', channel: 'meta', period: 'feb', goal: 'brand', inv: 32000000, imp: 4200000, ctr: 2.8, cpc: 280, conv: 890, cpa: 35955, roas: 2.9, status: 'ok' },
   { name: 'Retargeting - Visitantes Web', channel: 'meta', period: 'jan', goal: 'ret', inv: 18000000, imp: 1100000, ctr: 3.9, cpc: 420, conv: 1240, cpa: 14516, roas: 3.8, status: 'ok' },
@@ -366,18 +389,27 @@ const campaigns =[
   { name: 'Lead Gen Form - Franquicias', channel: 'linkedin', period: 'jan', goal: 'conv', inv: 19000000, imp: 290000, ctr: 1.2, cpc: 5470, conv: 28, cpa: 678571, roas: 1.8, status: 'ok' }
 ];
 
+// Variables de estado de los filtros
 let activeChannel = 'all';
 let activePeriod = 'q1';
 let activeGoal = 'all';
 
-// Funciones de formato
+// Función para mostrar números bonitos
 function fmtCOP(v) {
   if (v >= 1000000) return '$' + (v/1000000).toFixed(1) + 'M';
   if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
   return '$' + Math.round(v);
 }
 
-// Escuchadores de eventos para TODOS los filtros
+// Configuración general de gráficas
+Chart.defaults.color = '#6b7280';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+
+// ----------------------------------------------------
+// EVENTOS DE LOS BOTONES DE FILTRO
+// ----------------------------------------------------
 document.getElementById('filterChannel').addEventListener('click', e => {
   const btn = e.target.closest('.filter-btn'); if (!btn) return;
   document.querySelectorAll('#filterChannel .filter-btn').forEach(b => b.classList.remove('active'));
@@ -396,30 +428,81 @@ document.getElementById('filterGoal').addEventListener('click', e => {
   btn.classList.add('active'); activeGoal = btn.dataset.goal; updateDashboard();
 });
 
-// Función central que dispara la actualización real
+// ----------------------------------------------------
+// FUNCIÓN CENTRAL QUE ACTUALIZA TODO AL FILTRAR
+// ----------------------------------------------------
+let donutChart; // Para poder actualizar la dona
+
 function updateDashboard() {
+  // 1. Filtrar los datos matemáticamente
   const filtered = campaigns.filter(c => {
-    const matchChannel = activeChannel === 'all' || c.channel === activeChannel;
-    const matchPeriod = activePeriod === 'q1' || c.period === activePeriod;
-    const matchGoal = activeGoal === 'all' || c.goal === activeGoal;
+    const matchChannel = activeChannel === 'all' ? true : c.channel === activeChannel;
+    const matchPeriod = activePeriod === 'q1' ? true : c.period === activePeriod;
+    const matchGoal = activeGoal === 'all' ? true : c.goal === activeGoal;
     return matchChannel && matchPeriod && matchGoal;
   });
   
-  updateTable(filtered);
+  // 2. Actualizar KPIs y Tabla
   updateKPIs(filtered);
+  updateTable(filtered);
+  
+  // 3. Actualizar la gráfica de Dona
+  if(donutChart) {
+    const metaInv = filtered.filter(c=>c.channel==='meta').reduce((a,b)=>a+b.inv, 0);
+    const googleInv = filtered.filter(c=>c.channel==='google').reduce((a,b)=>a+b.inv, 0);
+    const inInv = filtered.filter(c=>c.channel==='linkedin').reduce((a,b)=>a+b.inv, 0);
+    donutChart.data.datasets[0].data =[metaInv, googleInv, inInv];
+    donutChart.update();
+  }
 }
 
-// 1. Actualiza la tabla
+function updateKPIs(filtered) {
+  if(filtered.length === 0) {
+    document.querySelector('.kpi-inv').textContent = '$0';
+    document.querySelector('.kpi-ing').textContent = '$0';
+    document.querySelector('.kpi-roas').textContent = '0.00x';
+    document.querySelector('.kpi-cpa').textContent = '$0';
+    document.querySelector('.kpi-ctr').textContent = '0.00%';
+    document.querySelector('.kpi-conv').textContent = '0';
+    document.querySelector('.donut-total').textContent = '$0';
+    return;
+  }
+
+  let inv = 0, ing = 0, conv = 0, imp = 0, clics = 0;
+  filtered.forEach(c => {
+    inv += c.inv;
+    ing += (c.inv * c.roas);
+    conv += c.conv;
+    imp += c.imp;
+    clics += c.imp * (c.ctr / 100);
+  });
+
+  const roasStr = inv > 0 ? (ing / inv).toFixed(2) + 'x' : '0.00x';
+  const cpaStr = conv > 0 ? fmtCOP(inv / conv) : '$0';
+  const ctrStr = imp > 0 ? (clics / imp * 100).toFixed(2) + '%' : '0.00%';
+
+  document.querySelector('.kpi-inv').textContent = fmtCOP(inv);
+  document.querySelector('.kpi-ing').textContent = fmtCOP(ing);
+  document.querySelector('.kpi-roas').textContent = roasStr;
+  document.querySelector('.kpi-cpa').textContent = cpaStr;
+  document.querySelector('.kpi-ctr').textContent = ctrStr;
+  document.querySelector('.kpi-conv').textContent = conv.toLocaleString();
+  document.querySelector('.donut-total').textContent = fmtCOP(inv);
+}
+
 function updateTable(filtered) {
   const tbody = document.getElementById('tableBody');
-  if (filtered.length === 0) { tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;">No hay datos para esta combinación</td></tr>'; return; }
+  if (filtered.length === 0) { 
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 20px; color: var(--muted);">No se encontraron campañas para esta combinación de filtros.</td></tr>'; 
+    return; 
+  }
   
   const maxInv = Math.max(...filtered.map(c => c.inv));
   tbody.innerHTML = filtered.map(c => {
     const chanLabel = {meta:'Meta', google:'Google', linkedin:'LinkedIn'}[c.channel];
-    const statusLabel = {ok:'Ok', warn:'Alerta', bad:'Malo'}[c.status];
+    const statusLabel = {ok:'Saludable', warn:'Revisar', bad:'Crítico'}[c.status];
     const periodLabel = {jan:'Ene', feb:'Feb', mar:'Mar'}[c.period];
-    const goalLabel = {brand:'Branding', conv:'Conv', ret:'Retarg'}[c.goal];
+    const goalLabel = {brand:'Branding', conv:'Conv.', ret:'Retarg.'}[c.goal];
     const barPct = (c.inv / maxInv * 100).toFixed(0);
     const barColor = {meta:'var(--meta)', google:'var(--google)', linkedin:'var(--linkedin)'}[c.channel];
     
@@ -430,7 +513,7 @@ function updateTable(filtered) {
         <td><span style="color:var(--muted); font-size:11px;">${periodLabel}</span></td>
         <td><span style="color:var(--muted); font-size:11px;">${goalLabel}</span></td>
         <td>
-          <div class="bar-cell"><span class="metric-value">${fmtCOP(c.inv)}</span>
+          <div class="bar-cell"><span class="metric-value" style="min-width:45px;">${fmtCOP(c.inv)}</span>
           <div class="mini-bar"><div class="mini-bar-fill" style="width:${barPct}%;background:${barColor};"></div></div></div>
         </td>
         <td>${(c.imp/1000).toFixed(0)}K</td>
@@ -443,55 +526,86 @@ function updateTable(filtered) {
   }).join('');
 }
 
-// 2. Calcula y actualiza los KPIs dinámicamente según la data filtrada
-function updateKPIs(filtered) {
-  let inv = 0, ing = 0, conv = 0, imp = 0, clics = 0;
-  
-  filtered.forEach(c => {
-    inv += c.inv;
-    ing += (c.inv * c.roas);
-    conv += c.conv;
-    imp += c.imp;
-    clics += c.imp * (c.ctr / 100);
+
+// ----------------------------------------------------
+// INICIALIZACIÓN DE TODAS LAS GRÁFICAS ESTÁTICAS / MACRO
+// ----------------------------------------------------
+// 1. Dona (Esta sí se actualiza por los filtros)
+const ctxDonut = document.getElementById('chartDonut').getContext('2d');
+donutChart = new Chart(ctxDonut, { 
+  type: 'doughnut', 
+  data: { labels: ['Meta', 'Google', 'LinkedIn'], datasets: [{ data:[0, 0, 0], backgroundColor:['rgba(24,119,242,0.85)', 'rgba(234,67,53,0.85)', 'rgba(10,102,194,0.85)'], borderWidth: 0, hoverOffset: 4 }] }, 
+  options: { cutout: '68%', plugins: { legend: { position: 'bottom' } } } 
+});
+
+// 2. Inversión vs ROAS
+const ctxIR = document.getElementById('chartInversionRoas').getContext('2d');
+new Chart(ctxIR, { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets: [{ label: 'Meta', data:[21,19,24], backgroundColor: 'rgba(24,119,242,0.7)', borderRadius:4 }, { label: 'Google', data:[23,27,27], backgroundColor: 'rgba(234,67,53,0.7)', borderRadius:4}, { label: 'LinkedIn', data: [14, 14, 16], backgroundColor: 'rgba(10,102,194,0.7)', borderRadius: 4}, { label: 'ROAS', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.08)', fill:true, yAxisID: 'y1', pointRadius:4 }] }, options: { scales: { x: {stacked: true, grid:{display:false}}, y: {stacked: true}, y1: {position: 'right', grid:{drawOnChartArea:false}} } } });
+
+// 3. CTR
+const ctxCTR = document.getElementById('chartCTR').getContext('2d');
+new Chart(ctxCTR, { type: 'line', data: { labels: ['Ene', 'Feb', 'Mar'], datasets:[{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2', tension:0.4 }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335', tension:0.4 }, { label: 'LinkedIn', data:[1.0, 1.1, 1.2], borderColor: '#0A66C2', tension:0.4 }] }, options:{ scales:{x:{grid:{display:false}}} } });
+
+// 4. CPA
+const ctxCPA = document.getElementById('chartCPA').getContext('2d');
+new Chart(ctxCPA, { type: 'bar', data: { labels:['Meta', 'Search', 'PMax', 'Display', 'LinkedIn'], datasets: [{ data:[27, 30, 31, 103, 692], backgroundColor:['rgba(24,119,242,0.7)', 'rgba(234,67,53,0.7)', 'rgba(234,67,53,0.5)', 'rgba(248,113,113,0.7)', 'rgba(10,102,194,0.7)'], borderRadius:4 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales:{ y:{grid:{display:false}} } } });
+
+// 5. Frecuencia
+const ctxFreq = document.getElementById('chartFrequency').getContext('2d');
+new Chart(ctxFreq, { type: 'line', data: { labels:['S1 Ene','S2 Ene','S3 Ene','S4 Ene','S1 Feb','S2 Feb','S3 Feb','S4 Feb'], datasets: [{ label:'Frecuencia', data:[2.1, 2.4, 2.8, 3.1, 3.6, 4.5, 4.8, 3.9], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.1)', fill:true, tension:0.4 }] }, options:{ plugins: { legend: { display: false } }, scales:{ x:{grid:{display:false}} } } });
+
+// 6. Atribución
+const ctxAttr = document.getElementById('chartAttribution').getContext('2d');
+new Chart(ctxAttr, { type: 'bar', data: { labels: ['Meta Ads', 'Google Search', 'Google PMax', 'LinkedIn'], datasets:[{ label: 'Last Click', data: [28, 52, 14, 6], backgroundColor: 'rgba(107,114,128,0.6)', borderRadius: 4 }, { label: 'Data-Driven', data:[41, 35, 18, 6], backgroundColor: 'rgba(200,241,53,0.7)', borderRadius: 4 } ] }, options: { scales: { x: { grid: { display: false } } } } });
+
+// 7. Funnel
+const ctxFunnel = document.getElementById('chartFunnel').getContext('2d');
+new Chart(ctxFunnel, { type: 'bar', data: { labels:['Impresiones (K)', 'Clics', 'Sesiones', 'Add to Cart', 'Checkout', 'Compra'], datasets:[{ data:[16800, 359, 290, 82, 51, 31], backgroundColor:['rgba(53,200,241,0.7)','rgba(53,200,241,0.65)','rgba(53,200,241,0.55)','rgba(200,241,53,0.65)','rgba(200,241,53,0.7)','rgba(74,222,128,0.8)'], borderRadius: 6 }] }, options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { type: 'logarithmic' }, y: { grid: { display: false } } } } });
+
+// ----------------------------------------------------
+// SISTEMA DE PROYECCIONES INTERACTIVAS
+// ----------------------------------------------------
+const projChartData = {
+  q2: { labels: ['Abr','May','Jun'], conservador: [58, 62, 68], moderado:[74, 82, 95], agresivo: [88, 101, 115] },
+  h2: { labels: ['Jul','Ago','Sep','Oct','Nov','Dic'], conservador:[70, 72, 75, 80, 95, 110], moderado:[92, 98, 104, 112, 135, 160], agresivo:[108, 116, 124, 138, 162, 190] },
+  year: { labels: ['Q1','Q2','Q3','Q4'], conservador:[185, 188, 217, 285], moderado:[185, 251, 294, 405], agresivo:[185, 304, 362, 490] }
+};
+
+let projChart = null;
+
+function buildProjectionChart(periodKey) {
+  const d = projChartData[periodKey];
+  if (projChart) projChart.destroy();
+  const ctx = document.getElementById('chartProjection').getContext('2d');
+  projChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: d.labels,
+      datasets:[
+        { label: 'Conservador', data: d.conservador, borderColor: '#6b7280', borderDash: [5,4], tension: 0.4 },
+        { label: 'Moderado ★', data: d.moderado, borderColor: '#c8f135', backgroundColor: 'rgba(200,241,53,0.08)', tension: 0.4, fill: true, borderWidth: 2.5 },
+        { label: 'Agresivo', data: d.agresivo, borderColor: '#35c8f1', borderDash: [3,3], tension: 0.4 }
+      ]
+    },
+    options: { interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false } }, y: { title: { display: true, text: 'Ingresos COP M' } } } }
   });
-
-  const roasStr = inv > 0 ? (ing / inv).toFixed(2) + 'x' : '0x';
-  const cpaStr = conv > 0 ? fmtCOP(inv / conv) : '$0';
-  const ctrStr = imp > 0 ? (clics / imp * 100).toFixed(2) + '%' : '0%';
-
-  document.querySelector('.kpi-inv').textContent = fmtCOP(inv);
-  document.querySelector('.kpi-ing').textContent = fmtCOP(ing);
-  document.querySelector('.kpi-roas').textContent = roasStr;
-  document.querySelector('.kpi-cpa').textContent = cpaStr;
-  document.querySelector('.kpi-ctr').textContent = ctrStr;
-  document.querySelector('.kpi-conv').textContent = conv.toLocaleString();
-  document.querySelector('.donut-total').textContent = fmtCOP(inv);
 }
 
-// Inicializar
+function setProjection(periodKey, el) {
+  document.querySelectorAll('.proj-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  buildProjectionChart(periodKey);
+}
+
+function selectScenario(el) {
+  document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Arrancar estado inicial
 updateDashboard();
+buildProjectionChart('q2');
 
-// =============== CHART DEFAULTS SIMULADOS ===============
-// Se mantienen tus gráficas base intactas tal como las pediste.
-Chart.defaults.color = '#6b7280';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-Chart.defaults.font.family = "'DM Sans', sans-serif";
-Chart.defaults.plugins.legend.labels.usePointStyle = true;
-
-const ctxIR = document.getElementById('chartInversionRoas').getContext('2d');
-new Chart(ctxIR, { type: 'bar', data: { labels: ['Ene', 'Feb', 'Mar'], datasets: [{ label: 'Meta', data:[21,19,24], backgroundColor: 'rgba(24,119,242,0.7)' }, { label: 'Google', data: [23,27,27], backgroundColor: 'rgba(234,67,53,0.7)'}, { label: 'ROAS', data:[3.1,2.9,3.8], type: 'line', borderColor: '#c8f135', yAxisID: 'y1' }] }, options: { scales: { x: {stacked: true}, y: {stacked: true}, y1: {position: 'right'} } } });
-
-const ctxDonut = document.getElementById('chartDonut').getContext('2d');
-new Chart(ctxDonut, { type: 'doughnut', data: { labels: ['Meta', 'Google', 'LinkedIn'], datasets: [{ data:[34.6, 41.6, 23.8], backgroundColor:['rgba(24,119,242,0.85)', 'rgba(234,67,53,0.85)', 'rgba(10,102,194,0.85)'], borderWidth: 0 }] }, options: { cutout: '68%', plugins: { legend: { position: 'bottom'} } } });
-
-const ctxCTR = document.getElementById('chartCTR').getContext('2d');
-new Chart(ctxCTR, { type: 'line', data: { labels: ['Ene', 'Feb', 'Mar'], datasets: [{ label: 'Meta', data:[3.1, 2.4, 2.8], borderColor: '#1877F2' }, { label: 'Google', data:[4.0, 4.2, 4.4], borderColor: '#EA4335' }] } });
-
-const ctxCPA = document.getElementById('chartCPA').getContext('2d');
-new Chart(ctxCPA, { type: 'bar', data: { labels: ['Meta', 'Google'], datasets: [{ data:[27, 30], backgroundColor:['rgba(24,119,242,0.7)', 'rgba(234,67,53,0.7)'] }] }, options: { indexAxis: 'y' } });
-
-const ctxFreq = document.getElementById('chartFrequency').getContext('2d');
-new Chart(ctxFreq, { type: 'line', data: { labels:['S1','S2','S3','S4'], datasets: [{ data: [2.1, 3.6, 4.8, 2.4], borderColor: '#fbbf24' }] } });
 </script>
 </body>
 </html>
