@@ -1,1 +1,2 @@
 streamlit
+starlette<0.40.0
